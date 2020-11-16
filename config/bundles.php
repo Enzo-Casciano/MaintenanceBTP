@@ -12,4 +12,8 @@ return [
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
+<<<<<<< HEAD
+=======
+    Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class => ['all' => true],
+>>>>>>> bd08eab1df918366c91ec2a40dcc05da8fffb025
 ];
