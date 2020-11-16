@@ -499,8 +499,6 @@
             "./config/routes/dev/web_profiler.yaml"
         ]
     },
-<<<<<<< HEAD
-=======
     "symfony/webpack-encore-bundle": {
         "version": "1.6",
         "recipe": {
@@ -520,7 +518,6 @@
             "./webpack.config.js"
         ]
     },
->>>>>>> bd08eab1df918366c91ec2a40dcc05da8fffb025
     "symfony/yaml": {
         "version": "v5.1.8"
     },
