@@ -23,11 +23,6 @@ class Intervention
     private $descriptionIntervention;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $categorieIntervention;
-
-    /**
      * @ORM\Column(type="string", length=20)
      */
     private $statutIntervention;
@@ -60,18 +55,6 @@ class Intervention
     public function setDescriptionIntervention(string $descriptionIntervention): self
     {
         $this->descriptionIntervention = $descriptionIntervention;
-
-        return $this;
-    }
-
-    public function getCategorieIntervention(): ?string
-    {
-        return $this->categorieIntervention;
-    }
-
-    public function setCategorieIntervention(string $categorieIntervention): self
-    {
-        $this->categorieIntervention = $categorieIntervention;
 
         return $this;
     }

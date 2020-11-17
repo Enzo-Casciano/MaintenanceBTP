@@ -84,32 +84,15 @@ class Zone
         return $this;
     }
 
-    /**
-     * @return Collection|Salle[]
-     */
+
     public function getSalles(): Collection
     {
         return $this->salles;
     }
 
-    public function addSalle(Salle $salle): self
+    public function setSalles(string $salles): self
     {
-        if (!$this->salles->contains($salle)) {
-            $this->salles[] = $salle;
-            $salle->setZone($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        if ($this->salles->removeElement($salle)) {
-            // set the owning side to null (unless already changed)
-            if ($salle->getZone() === $this) {
-                $salle->setZone(null);
-            }
-        }
+        $this->salles = $salles;
 
         return $this;
     }

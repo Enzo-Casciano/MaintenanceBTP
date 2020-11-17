@@ -18,17 +18,17 @@ class Ticket
      * @ORM\Column(type="integer")
      */
     private $id;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $titreTicket;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $descriptionTicket;
-
+    
     /**
      * @ORM\Column(type="datetime")
      */
@@ -58,6 +58,12 @@ class Ticket
      * @ORM\ManyToMany(targetEntity=Materiel::class, mappedBy="ticket")
      */
     private $materiels;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $categorieTicket;
+
 
     public function __construct()
     {
@@ -176,6 +182,18 @@ class Ticket
         if ($this->materiels->removeElement($materiel)) {
             $materiel->removeTicket($this);
         }
+
+        return $this;
+    }
+
+    public function getCategorieTicket(): ?string
+    {
+        return $this->categorieTicket;
+    }
+
+    public function setCategorieTicket(string $categorieTicket): self
+    {
+        $this->categorieTicket = $categorieTicket;
 
         return $this;
     }

@@ -1,20 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TicketController!{% endblock %}
+{% block title %}Demande d'intervention{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/EuroT_qiar233/Desktop/maintenanceBTP/src/Controller/TicketController.php'|file_link(0) }}">src/Controller/TicketController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/EuroT_qiar233/Desktop/maintenanceBTP/templates/ticket/index.html.twig'|file_link(0) }}">templates/ticket/index.html.twig</a></code></li>
-    </ul>
+{{ form_start(form) }}  
+<div class="row">
+    <div class="col-sm-6">
+        {# <div id="salleNum" data-prototype="{{ form_widget(form.salle.vars.prototype)| e ( 'html_attr' ) }}">
+            {% for row in form.salle %}
+                {{ form_row(row.numeroSalle) }}
+            {% endfor %}
+        </div>
+        <div id="niveauNum" data-prototype="{{ form_widget(form.niveaux.vars.prototype)| e ( 'html_attr' ) }}">
+            {% for rows in form.niveaux %}
+                {{ form_row(rows.nomNiveau) }}
+            {% endfor %}
+        </div>
+        <div id="zoneNum" data-prototype="{{ form_widget(form.zone.vars.prototype)| e ( 'html_attr' ) }}">
+            {% for r in form.zone %}
+                {{ form_row(r.nomZone) }}
+            {% endfor %}
+        </div> #}
+        <div id="materielNum" data-prototype="{{ form_widget(form.materiels.vars.prototype)| e ( 'html_attr' ) }}">
+            {% for ro in form.materiels %}
+                {{ form_row(ro.nomMateriel, {
+                'label': 'Quel(s) matériel(s) est défecteux ? :'
+            }) }}
+            {% endfor %}
+        </div>
+        {{ form_row(form.titreTicket, {
+                'label': 'Titre de la demande :'
+            }) }}
+    </div>
+    <div class="col-sm-6">
+        {{ form_row(form.categorieTicket, {
+                'label': 'Catégorie :'
+            }) }}
+    </div>
+        {{ form_row(form.descriptionTicket, {
+                'label': 'Description du problème rencontré :'
+            }) }}
 </div>
+
+{{ form_end(form) }} 
 {% endblock %}

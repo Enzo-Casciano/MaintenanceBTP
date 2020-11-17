@@ -1,20 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NiveauController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/EuroT_qiar233/Desktop/maintenanceBTP/src/Controller/NiveauController.php'|file_link(0) }}">src/Controller/NiveauController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/EuroT_qiar233/Desktop/maintenanceBTP/templates/niveau/index.html.twig'|file_link(0) }}">templates/niveau/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-lg">
+            <button type="button" class="btn btn-primary shadow">Voir demandes</button>
+        </div>
+        <div class="col-lg">
+            <div class="dropdown text-center">
+                {{ form_row(form.nomNiveau,{
+                    'label': false
+                } )}}
+            </div>
+        </div>
+        <div class="col-lg">
+        <a href="{{ path('ticket') }}">
+            <button type="button" class="btn btn-info float-right shadow">Faire demandes</button>
+        </a>
+        </div>
+    </div>
+    
+    <img src="{{asset('doc/img/rez-de-chaussee.png')}}"/> 
+    {{ form_end(form) }} 
 {% endblock %}

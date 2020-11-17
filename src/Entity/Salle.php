@@ -35,13 +35,13 @@ class Salle
     private $zone;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="salle")
+     * @ORM\ManyToMany(targetEntity=Ticket::class, inversedBy="salles")
      */
-    private $tickets;
+    private $ticket;
 
     public function __construct()
     {
-        $this->tickets = new ArrayCollection();
+        $this->ticket = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,16 +88,15 @@ class Salle
     /**
      * @return Collection|Ticket[]
      */
-    public function getTickets(): Collection
+    public function getTicket(): Collection
     {
-        return $this->tickets;
+        return $this->ticket;
     }
 
     public function addTicket(Ticket $ticket): self
     {
-        if (!$this->tickets->contains($ticket)) {
-            $this->tickets[] = $ticket;
-            $ticket->setSalle($this);
+        if (!$this->ticket->contains($ticket)) {
+            $this->ticket[] = $ticket;
         }
 
         return $this;
@@ -105,13 +104,9 @@ class Salle
 
     public function removeTicket(Ticket $ticket): self
     {
-        if ($this->tickets->removeElement($ticket)) {
-            // set the owning side to null (unless already changed)
-            if ($ticket->getSalle() === $this) {
-                $ticket->setSalle(null);
-            }
-        }
+        $this->ticket->removeElement($ticket);
 
         return $this;
     }
+
 }
