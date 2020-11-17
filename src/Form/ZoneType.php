@@ -13,7 +13,6 @@ class ZoneType extends AbstractType
     {
         $builder
             ->add('nomZone')
-            ->add('niveaux')
         ;
     }
 
