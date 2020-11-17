@@ -43,7 +43,7 @@ class Intervention
     private $dateFinIntervention;
 
     /**
-     * @ORM\ManyToOne(targetEntity=utilisateur::class, inversedBy="interventions")
+     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="interventions")
      */
     private $utilisateur;
 
