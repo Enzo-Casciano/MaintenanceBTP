@@ -1,3 +1,35 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+intervention:
+  path: /intervention
+  controller: App\Controller\InterventionController::index
+
+materiel:
+  path: /materiel
+  controller: App\Controller\MaterielController::index
+
+niveau:
+  path: /niveau
+  controller: App\Controller\NiveauController::index
+
+role:
+  path: /role
+  controller: App\Controller\RoleController::index
+
+salle:
+  path: /salle
+  controller: App\Controller\SalleController::index
+
+statut:
+  path: /statut
+  controller: App\Controller\StatutController::index
+
+ticket:
+  path: /ticket
+  controller: App\Controller\TicketController::index
+
+utilisateur:
+  path: /utilisateur
+  controller: App\Controller\UtilisateurController::index
+
+zone:
+  path: /zone
+  controller: App\Controller\ZoneController::index
