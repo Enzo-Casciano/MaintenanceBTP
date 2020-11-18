@@ -34,38 +34,17 @@ class TicketType extends AbstractType
                 ]
             ])
 
-            // ->add('salle', CollectionType::class,[
-            //     'entry_type' => SalleType::class,
-            //     'entry_options' => [
-            //         'label' => false
-            //     ],
-            //     'by_reference' => false,
-            //     'allow_add' => true,
-            //     'allow_delete' => true,
-            //     'delete_empty' => true            
-            //     ])
+            ->add('salle', CollectionType::class,[
+                'entry_type' => SalleType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true            
+                ])
 
-            // ->add('niveaux', CollectionType::class,[
-            //     'entry_type' => NiveauType::class,
-            //     'entry_options' => [
-            //         'label' => false
-            //     ],
-            //     'by_reference' => false,
-            //     'allow_add' => true,
-            //     'allow_delete' => true,
-            //     'delete_empty' => true            
-            //     ])
-
-            // ->add('zone', CollectionType::class,[
-            //     'entry_type' => ZoneType::class,
-            //     'entry_options' => [
-            //         'label' => false
-            //     ],
-            //     'by_reference' => false,
-            //     'allow_add' => true,
-            //     'allow_delete' => true,
-            //     'delete_empty' => true            
-            //     ])
 
             ->add('materiels', CollectionType::class,[
                 'entry_type' => MaterielType::class,
