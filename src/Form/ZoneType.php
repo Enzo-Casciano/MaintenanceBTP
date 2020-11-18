@@ -14,7 +14,12 @@ class ZoneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomZone', TextType::class)
+            ->add('nomZone', TextType::class,[
+                'attr' => [
+                    'class' => 'shadow mb-3'
+                ],
+                'empty_data' => ''
+            ])
 
             ->add('niveaux', CollectionType::class,[
                 'entry_type' => NiveauType::class,

@@ -22,11 +22,13 @@ class TicketController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $salle = new Salle();
         $niveau = new Niveau();
         $zone = new Zone();
-        $ticket = new Ticket();
+        $salle = new Salle();
         $materiel = new Materiel();
+        $ticket = new Ticket();
+
+        $ticket->setDateTicket(new \DateTime('now'));
 
         $zone->addNiveau($niveau);
         $salle->addZone($zone);
@@ -45,7 +47,7 @@ class TicketController extends AbstractController
             $em->persist($ticket);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            // return $this->redirectToRoute('home');
         }
 
 

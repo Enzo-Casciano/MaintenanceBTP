@@ -25,29 +25,24 @@ class Salle
     private $numeroSalle;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $etatSalle;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Zone::class, inversedBy="salles", cascade={"persist"})
+     */
+    private $zone;
 
     /**
      * @ORM\ManyToMany(targetEntity=Ticket::class, inversedBy="salles")
      */
     private $ticket;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Ticket::class, mappedBy="salle")
-     */
-    private $tickets;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Zone::class, inversedBy="salles")
-     */
-    private $zone;
-
     public function __construct()
     {
-        $this->ticket = new ArrayCollection();
         $this->zone = new ArrayCollection();
+        $this->ticket = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -80,30 +75,6 @@ class Salle
     }
 
     /**
-     * @return Collection|Ticket[]
-     */
-    public function getTicket(): Collection
-    {
-        return $this->ticket;
-    }
-
-    public function addTicket(Ticket $ticket): self
-    {
-        if (!$this->ticket->contains($ticket)) {
-            $this->ticket[] = $ticket;
-        }
-
-        return $this;
-    }
-
-    public function removeTicket(Ticket $ticket): self
-    {
-        $this->ticket->removeElement($ticket);
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Zone[]
      */
     public function getZone(): Collection
@@ -123,6 +94,38 @@ class Salle
     public function removeZone(Zone $zone): self
     {
         $this->zone->removeElement($zone);
+
+        return $this;
+    }
+
+    // /**
+    //  * @return Collection|Ticket[]
+    //  */
+    // public function getTickets(): Collection
+    // {
+    //     return $this->tickets;
+    // }
+
+    /**
+     * @return Collection|Ticket[]
+     */
+    public function getTicket(): Collection
+    {
+        return $this->ticket;
+    }
+
+    public function addTicket(Ticket $ticket): self
+    {
+        if (!$this->ticket->contains($ticket)) {
+            $this->ticket[] = $ticket;
+        }
+
+        return $this;
+    }
+
+    public function removeTicket(Ticket $ticket): self
+    {
+        $this->ticket->removeElement($ticket);
 
         return $this;
     }
