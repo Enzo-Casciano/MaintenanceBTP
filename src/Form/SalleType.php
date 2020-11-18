@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Salle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,6 +19,17 @@ class SalleType extends AbstractType
                     'class' => 'shadow mb-3'
                 ]
             ])
+
+            ->add('zone', CollectionType::class,[
+                'entry_type' => ZoneType::class,
+                'entry_options' => [
+                    'label' => false
+                ],
+                'by_reference' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'delete_empty' => true            
+                ])
         ;
     }
 

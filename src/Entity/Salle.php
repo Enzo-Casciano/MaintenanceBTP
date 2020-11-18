@@ -30,18 +30,24 @@ class Salle
     private $etatSalle;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Zone::class, inversedBy="salles")
-     */
-    private $zone;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Ticket::class, inversedBy="salles")
      */
     private $ticket;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Ticket::class, mappedBy="salle")
+     */
+    private $tickets;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Zone::class, inversedBy="salles")
+     */
+    private $zone;
+
     public function __construct()
     {
         $this->ticket = new ArrayCollection();
+        $this->zone = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -73,18 +79,6 @@ class Salle
         return $this;
     }
 
-    public function getZone(): ?Zone
-    {
-        return $this->zone;
-    }
-
-    public function setZone(?Zone $zone): self
-    {
-        $this->zone = $zone;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Ticket[]
      */
@@ -105,6 +99,30 @@ class Salle
     public function removeTicket(Ticket $ticket): self
     {
         $this->ticket->removeElement($ticket);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Zone[]
+     */
+    public function getZone(): Collection
+    {
+        return $this->zone;
+    }
+
+    public function addZone(Zone $zone): self
+    {
+        if (!$this->zone->contains($zone)) {
+            $this->zone[] = $zone;
+        }
+
+        return $this;
+    }
+
+    public function removeZone(Zone $zone): self
+    {
+        $this->zone->removeElement($zone);
 
         return $this;
     }
