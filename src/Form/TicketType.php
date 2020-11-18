@@ -34,7 +34,7 @@ class TicketType extends AbstractType
                 ]
             ])
 
-            ->add('salle', CollectionType::class,[
+            ->add('salles', CollectionType::class,[
                 'entry_type' => SalleType::class,
                 'entry_options' => [
                     'label' => false
@@ -42,7 +42,7 @@ class TicketType extends AbstractType
                 'by_reference' => false,
                 'allow_add' => true,
                 'allow_delete' => true,
-                'delete_empty' => true            
+                'delete_empty' => true         
                 ])
 
 
