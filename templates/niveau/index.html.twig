@@ -8,20 +8,22 @@
         <div class="col-lg">
             <button type="button" class="btn btn-primary shadow">Voir demandes</button>
         </div>
-        <div class="col-lg">
-            <div class="dropdown text-center">
-                {{ form_row(form.nomNiveau,{
-                    'label': false
-                } )}}
+            <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Choix niveau
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Rez-de-chaussée</a>
+                <a class="dropdown-item" href="#">Étage</a>
             </div>
-        </div>
+            </div>
         <div class="col-lg">
         <a href="{{ path('ticket') }}">
             <button type="button" class="btn btn-info float-right shadow">Faire demandes</button>
         </a>
         </div>
     </div>
-    
+    <br>
     <img src="{{asset('doc/img/rez-de-chaussee.png')}}"/> 
-    {{ form_end(form) }} 
+    {{ form_end(form,{'render_rest': false}) }} 
 {% endblock %}

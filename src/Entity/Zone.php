@@ -25,7 +25,7 @@ class Zone
     private $nomZone;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Niveau::class, mappedBy="zone")
+     * @ORM\ManyToMany(targetEntity=Niveau::class, mappedBy="zone", cascade={"persist"})
      */
     private $niveaux;
 

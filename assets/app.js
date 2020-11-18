@@ -12,3 +12,8 @@ import './styles/app.css';
 // import $ from 'jquery';
 
 console.log('Hello Webpack Encore! Edit me in assets/app.js');
+
+function myFunction1() {
+    var popup = document.getElementById("myPopup1");
+        popup.classList.toggle("show");
+    }

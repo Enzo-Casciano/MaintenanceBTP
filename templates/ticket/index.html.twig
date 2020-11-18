@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Demande d'intervention{% endblock %}
-
 {% block body %}
-{{ form_start(form) }}  
+
+{{ form_start(form) }}
+<div class="bd-callout bd-callout-primary mx-auto shadow" style="width: 500px">
+    <div class="text-center">
+        <b>Demande d'assistance</b>
+    </div>
+</div>
+<br>
 <div class="row">
     <div class="col-sm-6">
         <b>
-            {% for row in form.salle %}
+            {% for row in form.salles %}
                 {{ form_row(row.numeroSalle, {
                     'label': 'Salle :'
                 }) }}
@@ -50,10 +56,27 @@
                 'label': 'Description du problème rencontré :'
             }) }}
     </b>
+    <div class="popup" onclick="myFunction1()">
+        <span class="popuptext" id="myPopup1">
+            Votre demande d'assistance a bien été envoyé à l'administrateur.
+            <br>
+            Un technicien va prendre en charge votre demande dans les plus bref délais.
+            <br><br>
+            <a href="{{ path('home') }}"><button type="button" class="btn btn-success shadow" id="etape1"><i class="fa fa-check" aria-hidden="true"></i></button></a>
+        </span>
         {{ form_row(form.save, {
             'label': 'Confirmer'
         })}}
+    </div>
 </div>
 
-{{ form_end(form) }} 
+{{ form_end(form,{'render_rest': false}) }} 
+
+<script>
+function myFunction1() {
+    var popup = document.getElementById("myPopup1");
+        popup.classList.toggle("show");
+    }
+
+</script>
 {% endblock %}

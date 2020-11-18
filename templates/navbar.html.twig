@@ -1,9 +1,11 @@
 <nav class="navbar navbar-dark bg-dark">
     <h5 class="navbar-text mx-auto" style="color:white;">
       <a href="{{ path('home') }}">
-      Maintenance BTP - CESI Le Mans
+          <img src="{{asset('doc/img/CESI.png')}}" style="width: 200px; height: 80px" /> 
       </a>
     </h5>
-    <button type="button" class="btn btn-outline-primary">Connexion</button>
+    <a href="{{ path('utilisateur') }}">
+      <button type="button" class="btn btn-outline-primary">Connexion</button>
+    </a>
   </div>
 </nav>

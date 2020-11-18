@@ -30,7 +30,7 @@ class Ticket
     private $descriptionTicket;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateTicket;
 
@@ -50,25 +50,24 @@ class Ticket
     private $statut;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Materiel::class, mappedBy="ticket")
-     */
-    private $materiels;
-
-    /**
      * @ORM\Column(type="string", length=50)
      */
     private $categorieTicket;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Salle::class, inversedBy="tickets")
+     * @ORM\ManyToMany(targetEntity=Materiel::class, mappedBy="ticket", cascade={"persist"})
      */
-    private $salle;
+    private $materiels;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="ticket", cascade={"persist"})
+     */
+    private $salles;
 
     public function __construct()
     {
         $this->materiels = new ArrayCollection();
-        $this->salle = new ArrayCollection();
+        $this->salles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -190,15 +189,16 @@ class Ticket
     /**
      * @return Collection|Salle[]
      */
-    public function getSalle(): Collection
+    public function getSalles(): Collection
     {
-        return $this->salle;
+        return $this->salles;
     }
 
     public function addSalle(Salle $salle): self
     {
-        if (!$this->salle->contains($salle)) {
-            $this->salle[] = $salle;
+        if (!$this->salles->contains($salle)) {
+            $this->salles[] = $salle;
+            $salle->addTicket($this);
         }
 
         return $this;
@@ -206,7 +206,9 @@ class Ticket
 
     public function removeSalle(Salle $salle): self
     {
-        $this->salle->removeElement($salle);
+        if ($this->salles->removeElement($salle)) {
+            $salle->removeTicket($this);
+        }
 
         return $this;
     }
