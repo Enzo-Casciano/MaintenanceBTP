@@ -8,14 +8,14 @@
         <div class="col-lg">
             <button type="button" class="btn btn-primary shadow">Voir demandes</button>
         </div>
-            <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Choix niveau
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Rez-de-chaussée</a>
-                <a class="dropdown-item" href="#">Étage</a>
-            </div>
+            <div class="dropdown shadow">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choix niveau
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" id="rdc">Rez-de-chaussée</a>
+                    <a class="dropdown-item" href="#" id="eta">Étage</a>
+                </div>
             </div>
         <div class="col-lg">
         <a href="{{ path('ticket') }}">
@@ -24,6 +24,23 @@
         </div>
     </div>
     <br>
-    <img src="{{asset('doc/img/rez-de-chaussee.png')}}"/> 
+    <img src="{{asset('doc/img/rez-de-chaussee.png')}}" id="imgRdc"/> 
+    <img src="{{asset('doc/img/etage.jpg')}}" id="imgEta"/> 
     {{ form_end(form,{'render_rest': false}) }} 
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>
+     $("#imgEta").hide();
+
+    $("#rdc").click(function(){
+        $("#imgEta").hide();
+        $("#imgRdc").show();
+    });
+    $("#eta").click(function(){
+        $("#imgRdc").hide();
+        $("#imgEta").show();
+    });
+    </script>
 {% endblock %}

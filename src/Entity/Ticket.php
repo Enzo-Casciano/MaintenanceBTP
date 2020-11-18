@@ -60,9 +60,10 @@ class Ticket
     private $materiels;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="ticket", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="ticket")
      */
     private $salles;
+
 
     public function __construct()
     {
@@ -212,4 +213,6 @@ class Ticket
 
         return $this;
     }
+
+
 }

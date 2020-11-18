@@ -17,11 +17,10 @@ class SalleType extends AbstractType
             ->add('numeroSalle', TextType::class,[
                 'attr' => [
                     'class' => 'shadow mb-3'
-                ],
-                'empty_data' => ''
+                ]
             ])
 
-            ->add('zone', CollectionType::class,[
+            ->add('zones', CollectionType::class,[
                 'entry_type' => ZoneType::class,
                 'entry_options' => [
                     'label' => false
