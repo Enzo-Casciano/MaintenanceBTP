@@ -20,7 +20,7 @@ class Zone
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=15)
+     * @ORM\Column(type="string", length=30)
      */
     private $nomZone;
 
@@ -30,16 +30,15 @@ class Zone
     private $niveaux;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="zone")
+     * @ORM\ManyToMany(targetEntity=Salle::class, inversedBy="zones")
      */
-    private $salles;
-
+    private $salle;
 
 
     public function __construct()
     {
         $this->niveaux = new ArrayCollection();
-        $this->salles = new ArrayCollection();
+        $this->salle = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,16 +88,15 @@ class Zone
     /**
      * @return Collection|Salle[]
      */
-    public function getSalles(): Collection
+    public function getSalle(): Collection
     {
-        return $this->salles;
+        return $this->salle;
     }
 
     public function addSalle(Salle $salle): self
     {
-        if (!$this->salles->contains($salle)) {
-            $this->salles[] = $salle;
-            $salle->addZone($this);
+        if (!$this->salle->contains($salle)) {
+            $this->salle[] = $salle;
         }
 
         return $this;
@@ -106,10 +104,9 @@ class Zone
 
     public function removeSalle(Salle $salle): self
     {
-        if ($this->salles->removeElement($salle)) {
-            $salle->removeZone($this);
-        }
+        $this->salle->removeElement($salle);
 
         return $this;
     }
+
 }
