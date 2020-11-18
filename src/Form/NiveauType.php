@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Niveau;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,8 +13,12 @@ class NiveauType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomNiveau')
-            ->add('zone')
+            ->add('nomNiveau', EntityType::class, [
+                'class' => Niveau::class,
+                'attr' => [
+                    'class' => 'btn btn-secondary dropdown-toggle shadow' 
+                ]
+            ])
         ;
     }
 

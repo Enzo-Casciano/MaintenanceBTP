@@ -6,8 +6,8 @@ materiel:
   path: /materiel
   controller: App\Controller\MaterielController::index
 
-niveau:
-  path: /niveau
+home:
+  path: /
   controller: App\Controller\NiveauController::index
 
 role:
@@ -23,7 +23,7 @@ statut:
   controller: App\Controller\StatutController::index
 
 ticket:
-  path: /ticket
+  path: /demande
   controller: App\Controller\TicketController::index
 
 utilisateur:

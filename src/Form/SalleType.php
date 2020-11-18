@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Salle;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,9 +13,11 @@ class SalleType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numeroSalle')
-            ->add('etatSalle')
-            ->add('zone')
+            ->add('numeroSalle', TextType::class,[
+                'attr' => [
+                    'class' => 'shadow mb-3'
+                ]
+            ])
         ;
     }
 
