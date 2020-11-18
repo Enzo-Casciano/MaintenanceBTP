@@ -6,40 +6,53 @@
 {{ form_start(form) }}  
 <div class="row">
     <div class="col-sm-6">
-        {# <div id="salleNum" data-prototype="{{ form_widget(form.salle.vars.prototype)| e ( 'html_attr' ) }}">
+        <b>
             {% for row in form.salle %}
-                {{ form_row(row.numeroSalle) }}
+                {{ form_row(row.numeroSalle, {
+                    'label': 'Salle :'
+                }) }}
             {% endfor %}
-        </div>
-        <div id="niveauNum" data-prototype="{{ form_widget(form.niveaux.vars.prototype)| e ( 'html_attr' ) }}">
-            {% for rows in form.niveaux %}
-                {{ form_row(rows.nomNiveau) }}
+            
+            {% for r in formSalle.zone %}
+                {{ form_row(r.nomZone, {
+                    'label': 'Zone :'
+                }) }}
             {% endfor %}
-        </div>
-        <div id="zoneNum" data-prototype="{{ form_widget(form.zone.vars.prototype)| e ( 'html_attr' ) }}">
-            {% for r in form.zone %}
-                {{ form_row(r.nomZone) }}
-            {% endfor %}
-        </div> #}
-        <div id="materielNum" data-prototype="{{ form_widget(form.materiels.vars.prototype)| e ( 'html_attr' ) }}">
+
             {% for ro in form.materiels %}
                 {{ form_row(ro.nomMateriel, {
-                'label': 'Quel(s) matériel(s) est défecteux ? :'
-            }) }}
+                    'label': 'Quel(s) matériel(s) est défecteux ? :'
+                }) }}
             {% endfor %}
-        </div>
+        </b>
+    </div>
+    <div class="col-sm-6">
+        <b>
+            {% for rows in formZone.niveaux %}
+                {{ form_row(rows.nomNiveau, {
+                    'label': 'Niveau :'
+                }) }}
+            {% endfor %}
+
         {{ form_row(form.titreTicket, {
                 'label': 'Titre de la demande :'
             }) }}
-    </div>
-    <div class="col-sm-6">
+
         {{ form_row(form.categorieTicket, {
                 'label': 'Catégorie :'
             }) }}
+        </b>
     </div>
+</div>
+<div class="text-center">
+    <b>
         {{ form_row(form.descriptionTicket, {
                 'label': 'Description du problème rencontré :'
             }) }}
+    </b>
+        {{ form_row(form.save, {
+            'label': 'Confirmer'
+        })}}
 </div>
 
 {{ form_end(form) }} 

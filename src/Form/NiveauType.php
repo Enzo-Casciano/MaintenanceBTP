@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Niveau;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,6 +20,7 @@ class NiveauType extends AbstractType
                     'class' => 'btn btn-secondary dropdown-toggle shadow' 
                 ]
             ])
+
         ;
     }
 

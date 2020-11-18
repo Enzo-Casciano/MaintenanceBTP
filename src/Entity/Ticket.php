@@ -45,11 +45,6 @@ class Ticket
     private $intervention;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Salle::class, inversedBy="tickets")
-     */
-    private $salle;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Statut::class, inversedBy="tickets")
      */
     private $statut;
@@ -64,10 +59,16 @@ class Ticket
      */
     private $categorieTicket;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Salle::class, inversedBy="tickets")
+     */
+    private $salle;
+
 
     public function __construct()
     {
         $this->materiels = new ArrayCollection();
+        $this->salle = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,18 +136,6 @@ class Ticket
         return $this;
     }
 
-    public function getSalle(): ?Salle
-    {
-        return $this->salle;
-    }
-
-    public function setSalle(?Salle $salle): self
-    {
-        $this->salle = $salle;
-
-        return $this;
-    }
-
     public function getStatut(): ?Statut
     {
         return $this->statut;
@@ -194,6 +183,30 @@ class Ticket
     public function setCategorieTicket(string $categorieTicket): self
     {
         $this->categorieTicket = $categorieTicket;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Salle[]
+     */
+    public function getSalle(): Collection
+    {
+        return $this->salle;
+    }
+
+    public function addSalle(Salle $salle): self
+    {
+        if (!$this->salle->contains($salle)) {
+            $this->salle[] = $salle;
+        }
+
+        return $this;
+    }
+
+    public function removeSalle(Salle $salle): self
+    {
+        $this->salle->removeElement($salle);
 
         return $this;
     }

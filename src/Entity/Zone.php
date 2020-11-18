@@ -30,9 +30,11 @@ class Zone
     private $niveaux;
 
     /**
-     * @ORM\OneToMany(targetEntity=Salle::class, mappedBy="zone")
+     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="zone")
      */
     private $salles;
+
+
 
     public function __construct()
     {
@@ -84,15 +86,29 @@ class Zone
         return $this;
     }
 
-
+    /**
+     * @return Collection|Salle[]
+     */
     public function getSalles(): Collection
     {
         return $this->salles;
     }
 
-    public function setSalles(string $salles): self
+    public function addSalle(Salle $salle): self
     {
-        $this->salles = $salles;
+        if (!$this->salles->contains($salle)) {
+            $this->salles[] = $salle;
+            $salle->addZone($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSalle(Salle $salle): self
+    {
+        if ($this->salles->removeElement($salle)) {
+            $salle->removeZone($this);
+        }
 
         return $this;
     }
