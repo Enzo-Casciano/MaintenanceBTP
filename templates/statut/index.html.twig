@@ -1,20 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello StatutController!{% endblock %}
+{% block title %}Liste demandes assistances{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+{# {% for t in ticket %}
+   | {{ t.titreTicket }} - 
+   | {{ t.dateTicket|date('Y-m-d') }} -
+{% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/EuroT_qiar233/Desktop/maintenanceBTP/src/Controller/StatutController.php'|file_link(0) }}">src/Controller/StatutController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/EuroT_qiar233/Desktop/maintenanceBTP/templates/statut/index.html.twig'|file_link(0) }}">templates/statut/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% for user in utilisateur %}
+    {{ user.nomUtilisateur }}    
+    {{ user.prenomUtilisateur }}    
+{% endfor %}
+
+{% for stat in statut %}
+    {{ stat.nomStatut }} - 
+    {{ stat.criticiteStatut }} - 
+{% endfor %}
+
+{% for s in salle %}
+    {{ s.numeroSalle }} - 
+{% endfor %} #}
+
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Titre</th>
+      <th scope="col">Date demande</th>
+      <th scope="col">Demandeur</th>
+      <th scope="col">Statut</th>
+      <th scope="col">Criticité</th>
+      <th scope="col">Salle</th>
+      <th scope="col">Détails</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in ticket %}
+    <tr>
+        <th scope="row">{{ t.titreTicket }}</th>
+        <td>{{ t.dateTicket|date('Y-m-d') }}</td>
+            {% for user in utilisateur %}
+                <td>{{ user.prenomUtilisateur }} {{ user.nomUtilisateur }}</td>
+                    {% for stat in statut %}
+                        <td>{{ stat.nomStatut }}</td>
+                        <td>{{ stat.criticiteStatut }}</td>
+                            {% for s in salle %}
+                                <td>{{ s.numeroSalle }}</td>
+                                <td><button type="button" class="btn btn-primary">Voir détails</button></td>
+                                </tr>
+                            {% endfor %}
+                    {% endfor %}
+            {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
 {% endblock %}

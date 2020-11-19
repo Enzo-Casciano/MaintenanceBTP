@@ -29,7 +29,6 @@ class Salle
      */
     private $etatSalle;
 
-
     /**
      * @ORM\ManyToMany(targetEntity=Zone::class, mappedBy="salle", cascade={"persist"})
      */

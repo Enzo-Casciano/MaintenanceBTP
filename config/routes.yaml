@@ -18,9 +18,14 @@ salle:
   path: /salle
   controller: App\Controller\SalleController::index
 
-statut:
-  path: /statut
-  controller: App\Controller\StatutController::index
+resultat:
+  path: /resultat
+  controller: App\Controller\StatutController::showTicket
+
+
+showOne:
+  path: /ticket/{id}
+  controller: App\Controller\StatutController::showOneTicket
 
 ticket:
   path: /demande

@@ -6,7 +6,9 @@
     {{ form_start(form) }}
     <div class="row">
         <div class="col-lg">
-            <button type="button" class="btn btn-primary shadow">Voir demandes</button>
+            <a href="{{ path('resultat') }}">
+                <button type="button" class="btn btn-primary shadow">Voir demandes</button>
+            </a>
         </div>
             <div class="dropdown shadow">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
