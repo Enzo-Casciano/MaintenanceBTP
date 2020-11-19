@@ -20,7 +20,7 @@ class Salle
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=10)
      */
     private $numeroSalle;
 
@@ -31,7 +31,7 @@ class Salle
 
 
     /**
-     * @ORM\ManyToMany(targetEntity=Zone::class, mappedBy="salle")
+     * @ORM\ManyToMany(targetEntity=Zone::class, mappedBy="salle", cascade={"persist"})
      */
     private $zones;
 
