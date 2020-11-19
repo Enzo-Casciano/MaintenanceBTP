@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Salle;
 use App\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -28,7 +29,15 @@ class TicketType extends AbstractType
                     'class' => 'shadow mb-3'
                 ]
             ])
-            ->add('categorieTicket', TextType::class,[
+            ->add('categorieTicket', ChoiceType::class,[
+                'choices' => [
+                    ' Menuiserie' => 'Menuiserie',
+                    ' Électricité' => 'Électricité',
+                    ' Informatique' => 'Informatique',
+                    ' Petit bricolage' => "Petit bricolage",
+                    ' Organisation' => 'Organisation',
+                    ' Plomberie' => 'Plomberie'
+                ],
                 'attr' => [
                     'class' => 'shadow mb-3'
                 ]

@@ -17,15 +17,16 @@ class ZoneType extends AbstractType
         $builder
             ->add('nomZone', ChoiceType::class,[
                 'choices' => [
-                    'Zone 1' => 1,
-                    'Zone 2' => 2,
-                    'Zone 3' => 3,
-                    'Zone 4' => 4,
-                    'Zone 5' => 5
+                    ' Zone 1' => 'Zone 1',
+                    ' Zone 2' => 'Zone 2',
+                    ' Zone 3' => 'Zone 3',
+                    ' Zone 4' => 'Zone 4',
+                    ' Zone 5' => 'Zone 5'
                 ],
                 'attr' => [
                     'class' => 'shadow'
-                ]
+                ],
+                'empty_data' => 'Erreur'
             ])
 
             ->add('niveaux', CollectionType::class,[

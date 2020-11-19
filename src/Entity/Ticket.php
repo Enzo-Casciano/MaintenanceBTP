@@ -60,7 +60,7 @@ class Ticket
     private $materiels;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="ticket")
+     * @ORM\ManyToMany(targetEntity=Salle::class, mappedBy="ticket", cascade={"persist"})
      */
     private $salles;
 

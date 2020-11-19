@@ -34,7 +34,7 @@ class TicketController extends AbstractController
         $salle->addZone($zone);
         $ticket->addSalle($salle);
         $ticket->addMateriel($materiel);
-
+        
         $form = $this->createForm(TicketType::class, $ticket);
         $formSalle = $this->createForm(SalleType::class, $salle);
         $formZone = $this->createForm(ZoneType::class, $zone);
@@ -43,7 +43,7 @@ class TicketController extends AbstractController
         $formSalle->handleRequest($request);
         $formZone->handleRequest($request);
         
-        if($form->isSubmitted()){
+        if($form->isSubmitted() && $formSalle->isSubmitted() && $formZone->isSubmitted()){
             $em->persist($ticket);
             $em->flush();
 

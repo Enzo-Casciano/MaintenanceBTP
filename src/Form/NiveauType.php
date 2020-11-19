@@ -17,12 +17,12 @@ class NiveauType extends AbstractType
         $builder
             ->add('nomNiveau', ChoiceType::class, [
                 'choices' => [
-                    'Rez-de-chaussée' => 1,
-                    'Étage' => 2
+                    ' Rez-de-chaussée' => 'Rez-de-chaussée',
+                    ' Étage' => 'Étage'
                 ],
                 'attr' => [
                     'class' => 'shadow' 
-                ],
+                ]
             ])
 
         ;
