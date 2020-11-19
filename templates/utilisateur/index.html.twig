@@ -4,6 +4,38 @@
 
 {% block body %}
 
-
+<body>
+    <div id="login">
+        <div class="container">
+            <div class="shadow card text-white mx-auto bg-light mb-3 card mb-3" style="width: 500px;">
+                <div class="card-header card bg-secondary text-center text-dark">Connexion</div>
+                <div class="card-body text-info">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-12">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <div class="form-group">
+                                <label for="Adresse Mail" class="text-primary">Adresse Mail:</label><br>
+                                <input type="text" name="Adresse Mail" id="Adresse Mail" class="form-control" placeholder="Mail">
+                            </div>
+                            <div class="form-group">
+                                <label for="Mot de passe" class="text-primary">Mot de passe:</label><br>
+                                <input type="text" name="Mot de passe" id="Mot de passe" class="form-control" placeholder="Mot de passe">
+                            </div>
+                            <div class="text-center form-group">
+                                <input class="btn btn-primary" type="submit" value="Se connecter">
+                            </div>
+                            <div class="text-center form-group">
+                                <div id="Mot de passe oublié"> 
+                                        <a class="text-info stretched-link" href="#" role="link">Mot de passe oublié ?</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 
 {% endblock %}
