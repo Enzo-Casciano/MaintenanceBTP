@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Zone;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,11 +15,18 @@ class ZoneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nomZone', TextType::class,[
-                'attr' => [
-                    'class' => 'shadow mb-3'
+            ->add('nomZone', ChoiceType::class,[
+                'choices' => [
+                    ' Zone 1' => 'Zone 1',
+                    ' Zone 2' => 'Zone 2',
+                    ' Zone 3' => 'Zone 3',
+                    ' Zone 4' => 'Zone 4',
+                    ' Zone 5' => 'Zone 5'
                 ],
-                'empty_data' => ''
+                'attr' => [
+                    'class' => 'shadow'
+                ],
+                'empty_data' => 'Erreur'
             ])
 
             ->add('niveaux', CollectionType::class,[

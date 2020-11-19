@@ -64,6 +64,7 @@ class Ticket
      */
     private $salles;
 
+
     public function __construct()
     {
         $this->materiels = new ArrayCollection();
@@ -212,4 +213,6 @@ class Ticket
 
         return $this;
     }
+
+
 }

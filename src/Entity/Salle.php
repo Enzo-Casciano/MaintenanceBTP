@@ -20,7 +20,7 @@ class Salle
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=10)
      */
     private $numeroSalle;
 
@@ -29,10 +29,11 @@ class Salle
      */
     private $etatSalle;
 
+
     /**
-     * @ORM\ManyToMany(targetEntity=Zone::class, inversedBy="salles", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Zone::class, mappedBy="salle", cascade={"persist"})
      */
-    private $zone;
+    private $zones;
 
     /**
      * @ORM\ManyToMany(targetEntity=Ticket::class, inversedBy="salles")
@@ -41,7 +42,7 @@ class Salle
 
     public function __construct()
     {
-        $this->zone = new ArrayCollection();
+        $this->zones = new ArrayCollection();
         $this->ticket = new ArrayCollection();
     }
 
@@ -74,29 +75,6 @@ class Salle
         return $this;
     }
 
-    /**
-     * @return Collection|Zone[]
-     */
-    public function getZone(): Collection
-    {
-        return $this->zone;
-    }
-
-    public function addZone(Zone $zone): self
-    {
-        if (!$this->zone->contains($zone)) {
-            $this->zone[] = $zone;
-        }
-
-        return $this;
-    }
-
-    public function removeZone(Zone $zone): self
-    {
-        $this->zone->removeElement($zone);
-
-        return $this;
-    }
 
     // /**
     //  * @return Collection|Ticket[]
@@ -105,6 +83,34 @@ class Salle
     // {
     //     return $this->tickets;
     // }
+
+
+    /**
+     * @return Collection|Zone[]
+     */
+    public function getZones(): Collection
+    {
+        return $this->zones;
+    }
+
+    public function addZone(Zone $zone): self
+    {
+        if (!$this->zones->contains($zone)) {
+            $this->zones[] = $zone;
+            $zone->addSalle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeZone(Zone $zone): self
+    {
+        if ($this->zones->removeElement($zone)) {
+            $zone->removeSalle($this);
+        }
+
+        return $this;
+    }
 
     /**
      * @return Collection|Ticket[]

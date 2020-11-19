@@ -13,40 +13,42 @@
 <div class="row">
     <div class="col-sm-6">
         <b>
-            {% for row in form.salles %}
-                {{ form_row(row.numeroSalle, {
-                    'label': 'Salle :'
-                }) }}
-            {% endfor %}
-            
-            {% for r in formSalle.zone %}
-                {{ form_row(r.nomZone, {
-                    'label': 'Zone :'
-                }) }}
-            {% endfor %}
-
-            {% for ro in form.materiels %}
-                {{ form_row(ro.nomMateriel, {
-                    'label': 'Quel(s) matériel(s) est défecteux ? :'
-                }) }}
-            {% endfor %}
-        </b>
-    </div>
-    <div class="col-sm-6">
-        <b>
             {% for rows in formZone.niveaux %}
                 {{ form_row(rows.nomNiveau, {
                     'label': 'Niveau :'
                 }) }}
             {% endfor %}
 
-        {{ form_row(form.titreTicket, {
+            {% for row in form.salles %}
+                {{ form_row(row.numeroSalle, {
+                    'label': 'Salle :'
+                }) }}
+            {% endfor %}
+            
+            {{ form_row(form.categorieTicket, {
+                'label': 'Catégorie :'
+            }) }}
+
+        </b>
+    </div>
+    <div class="col-sm-6">
+        <b>
+            {% for r in formSalle.zones %}
+                {{ form_row(r.nomZone, {
+                    'label': 'Zone :'
+                }) }}
+            {% endfor %}
+
+            {{ form_row(form.titreTicket, {
                 'label': 'Titre de la demande :'
             }) }}
 
-        {{ form_row(form.categorieTicket, {
-                'label': 'Catégorie :'
-            }) }}
+            {% for ro in form.materiels %}
+                {{ form_row(ro.nomMateriel, {
+                    'label': 'Quel(s) matériel(s) est défecteux ? :'
+                }) }}
+            {% endfor %}
+ 
         </b>
     </div>
 </div>
