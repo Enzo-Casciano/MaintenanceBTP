@@ -1,5 +1,5 @@
 intervention:
-  path: /intervention
+  path: /intervention/{id}
   controller: App\Controller\InterventionController::index
 
 materiel:
@@ -23,7 +23,7 @@ resultat:
   controller: App\Controller\StatutController::showTicket
 
 
-showOne:
+vueDemande:
   path: /ticket/{id}
   controller: App\Controller\StatutController::showOneTicket
 

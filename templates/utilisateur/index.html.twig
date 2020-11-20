@@ -3,12 +3,14 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-
-<body>
+<a href="{{ path('home') }}">
+  <i class="fas fa-arrow-circle-left fa-2x"></i>
+</a>
+<br><br>
     <div id="login">
         <div class="container">
             <div class="shadow card text-white mx-auto bg-light mb-3 card mb-3" style="width: 500px;">
-                <div class="card-header card bg-secondary text-center text-dark">Connexion</div>
+                <div class="card-header card bg-secondary text-center text-white"><h2>Connexion</h2></div>
                 <div class="card-body text-info">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-12">
@@ -36,6 +38,5 @@
             </div>
         </div>
     </div>
-</body>
 
 {% endblock %}

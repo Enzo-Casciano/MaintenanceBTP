@@ -2,12 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Materiel;
+use App\Entity\Niveau;
 use App\Entity\Salle;
 use App\Entity\Statut;
 use App\Entity\Ticket;
 use App\Entity\Utilisateur;
+use App\Entity\Zone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,10 +30,6 @@ class StatutController extends AbstractController
                        ->getRepository(Ticket::class)
                        ->findAll();
 
-        // $utilisateur = $this->getDoctrine()
-        //                     ->getRepository(Utilisateur::class)
-        //                     ->find($id);
-
         $salle = $this->getDoctrine()
                       ->getRepository(Salle::class)
                       ->findAll();
@@ -46,7 +46,6 @@ class StatutController extends AbstractController
 
         return $this->render('statut/index.html.twig',[
                         'ticket' => $ticket,
-                        // 'utilisateur' => $utilisateur,
                         'salle' => $salle,
                         'statut' => $statut,
                         'utilisateur' => $user
@@ -59,18 +58,38 @@ class StatutController extends AbstractController
                        ->getRepository(Ticket::class)
                        ->find($id);
 
-        // $utilisateur = $this->getDoctrine()
-        //                     ->getRepository(Utilisateur::class)
-        //                     ->find($id);
+        $utilisateur = $this->getDoctrine()
+                            ->getRepository(Utilisateur::class)
+                            ->find($id);
+
+        $statut = $this->getDoctrine()
+                       ->getRepository(Statut::class)
+                       ->find($id);
 
         $salle = $this->getDoctrine()
                       ->getRepository(Salle::class)
                       ->find($id);
 
-        return $this->render('role/index.html.twig',[
+        $niveau = $this->getDoctrine()
+                      ->getRepository(Niveau::class)
+                      ->find($id);
+
+        $zone = $this->getDoctrine()
+                      ->getRepository(Zone::class)
+                      ->find($id);
+
+        $materiel = $this->getDoctrine()
+                      ->getRepository(Materiel::class)
+                      ->find($id);
+
+        return $this->render('vueDemande/index.html.twig',[
                         'ticket' => $ticket,
-                        // 'utilisateur' => $utilisateur,
-                        'salle' => $salle
+                        'utilisateur' => $utilisateur,
+                        'salle' => $salle,
+                        'statut' => $statut,
+                        'niveau' => $niveau,
+                        'zone' => $zone,
+                        'materiel' => $materiel
             ]);
     }
 }

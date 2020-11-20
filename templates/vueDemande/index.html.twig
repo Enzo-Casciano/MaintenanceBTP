@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Intervention{% endblock %}
+{% block title %}Observation de la demande{% endblock %}
 
 {% block body %}
 <a href="{{ path('home') }}">
@@ -42,23 +42,22 @@
     </div>
 </div>
 <br>
-{{ form_start(form) }}
-<b>
-<div class="text-center mx-auto" style="width: 800px">
-    {{ form_row(form.descriptionIntervention, {
-        'label' : 'Description de l\'intervention :'
-    }) }}
-</div>
-</b>
-
-
 <div class="text-center">
-    {{ form_row(form.save, {
-        'label': 'Confirmer'
-    })}}
-
-{{ form_end(form,{'render_rest': false}) }}
+{# <a href="{{ path('intervention') }}"> #}
+    <button type="button" class="btn btn-warning shadow" id="btn1" disabled>Résolu</button>
+{# </a> #}
+    <button type="button" class="btn btn-success shadow"id="btn2" >Commencer</button>
+</div>
 <br>
-<br>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+$(document).ready(function () {
+  $("#btn2").click(function(){
+      $("#btn1").prop("disabled", false);
+      $("#btn2").prop("disabled", true);
+  });
+  
+  });
+</script>
 {% endblock %}

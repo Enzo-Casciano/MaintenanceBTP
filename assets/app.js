@@ -13,7 +13,11 @@ import './styles/app.css';
 
 console.log('Hello Webpack Encore! Edit me in assets/app.js');
 
-function myFunction1() {
-    var popup = document.getElementById("myPopup1");
-        popup.classList.toggle("show");
-    }
+
+    $(document).ready(function () {
+        $("#btn2").click(function(){
+            $("#btn1").prop("disabled", true);
+            $("#btn2").prop("disabled", false);
+        });
+        
+        });

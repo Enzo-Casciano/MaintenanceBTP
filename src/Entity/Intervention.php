@@ -23,17 +23,12 @@ class Intervention
     private $descriptionIntervention;
 
     /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $statutIntervention;
-
-    /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateDebutIntervention;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateFinIntervention;
 
@@ -55,18 +50,6 @@ class Intervention
     public function setDescriptionIntervention(string $descriptionIntervention): self
     {
         $this->descriptionIntervention = $descriptionIntervention;
-
-        return $this;
-    }
-
-    public function getStatutIntervention(): ?string
-    {
-        return $this->statutIntervention;
-    }
-
-    public function setStatutIntervention(string $statutIntervention): self
-    {
-        $this->statutIntervention = $statutIntervention;
 
         return $this;
     }
