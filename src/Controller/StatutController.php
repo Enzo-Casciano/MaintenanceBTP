@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\StatutRepository;
 
 class StatutController extends AbstractController
 {
@@ -20,36 +21,25 @@ class StatutController extends AbstractController
         ]);
     }
 
-    public function showTicket(){
+    public function showTicket(StatutRepository $statut){
 
-        $ticket = $this->getDoctrine()
-                       ->getRepository(Ticket::class)
-                       ->findAll();
+        $listeTickets = $statut->getTicketDetails();
 
-        // $utilisateur = $this->getDoctrine()
-        //                     ->getRepository(Utilisateur::class)
-        //                     ->find($id);
-
-        $salle = $this->getDoctrine()
-                      ->getRepository(Salle::class)
-                      ->findAll();
-        
-        $statut = $this->getDoctrine()
-                      ->getRepository(Statut::class)
-                      ->findAll();
-
-        $user = $this->getDoctrine()
-                      ->getRepository(Utilisateur::class)
-                      ->findAll();
+        // foreach($listeTickets as $ticket)
+        // {
+        //     Ne déclenche pas de requête : les commentaires sont déjà chargés !
+        //     Vous pourriez faire une boucle dessus pour les afficher tous
+        //     $ticket->();
+        // }
 
 
 
         return $this->render('statut/index.html.twig',[
-                        'ticket' => $ticket,
+                        'listeTicket' => $listeTickets,
                         // 'utilisateur' => $utilisateur,
-                        'salle' => $salle,
-                        'statut' => $statut,
-                        'utilisateur' => $user
+                        //'salle' => $salle,
+                        //'statut' => $statut,
+                        //'utilisateur' => $user
             ]);
     }
 
