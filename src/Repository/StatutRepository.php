@@ -32,6 +32,18 @@ class StatutRepository extends ServiceEntityRepository
                   ->getResult();
     }
 
+    public function updateStatutTicket($idticket, $idstatut)
+    {
+        return $this->createQueryBuilder('t')
+        ->update()
+        ->set('t.statut', '?1')
+        ->where('t.id = ?2')
+        ->setParameter(1, $idstatut)
+        ->setParameter(2, $idticket)
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Statut[] Returns an array of Statut objects
     //  */

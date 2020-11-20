@@ -11,6 +11,7 @@ use App\Entity\Ticket;
 use App\Entity\Utilisateur;
 use App\Entity\Zone;
 use App\Form\InterventionType;
+use App\Repository\StatutRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InterventionController extends AbstractController
 {
 
-    public function index(Request $request, EntityManagerInterface $em, $id): Response
+    public function index(Request $request, EntityManagerInterface $em, $id, StatutRepository $statutRep): Response
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -66,6 +67,8 @@ class InterventionController extends AbstractController
                          ->getRepository(Materiel::class)
                          ->find($id);
 
+        $changementStatutEnCours = $statutRep->updateStatutTicket($id, 5);
+
     return $this->render('intervention/index.html.twig',[
          'form' => $form->createView(),
          'ticket' => $ticket,
@@ -74,7 +77,8 @@ class InterventionController extends AbstractController
          'statut' => $statut,
          'niveau' => $niveau,
          'zone' => $zone,
-         'materiel' => $materiel
+         'materiel' => $materiel,
+         'changementStatutEnCours' => $changementStatutEnCours
     ]);
 }
 

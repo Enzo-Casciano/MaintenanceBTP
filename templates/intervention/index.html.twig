@@ -52,7 +52,7 @@
 </b>
 
 
-<div class="text-center">
+<div class="text-center" id="confirmer">
     {{ form_row(form.save, {
         'label': 'Confirmer'
     })}}
@@ -60,5 +60,11 @@
 {{ form_end(form,{'render_rest': false}) }}
 <br>
 <br>
-
+<script>
+$(document).ready(function () {
+    $("#confirmer").click(function(){
+        $changementStatutEnCours
+    });
+});
+</script>
 {% endblock %}
