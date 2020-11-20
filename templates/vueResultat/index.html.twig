@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Intervention{% endblock %}
+{% block title %}Hello MaterielController!{% endblock %}
 
 {% block body %}
-<a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
+<a href="{{ path('resultat') }}">
   <i class="fas fa-arrow-circle-left fa-2x"></i>
 </a>
 <h5 class="text-center">Détails de la demande :</h5>
@@ -41,26 +41,11 @@
             </div>
         </div>
         <hr class="shadow">
+        <p class="text-center"><b>Technicien intervenant : </b><br>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
+        <br>
+        <p class="text-center"><b>Description du technicien : </b><br>{{ intervention.descriptionIntervention }}</p>
     </div>
 </div>
 <br>
-{{ form_start(form) }}
-<b>
-<div class="text-center mx-auto" style="width: 1000px">
-    {{ form_row(form.descriptionIntervention, {
-        'label' : 'Description de l\'intervention :'
-    }) }}
-</div>
-</b>
-
-
-<div class="text-center">
-    {{ form_row(form.save, {
-        'label': 'Confirmer'
-    })}}
-
-{{ form_end(form,{'render_rest': false}) }}
-<br>
-<br>
-
+<script>
 {% endblock %}

@@ -17,7 +17,7 @@ body {
   .popup .popuptext {
     visibility: hidden;
     height: 100px;
-    width: 400px;
+    width: 800px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -28,6 +28,7 @@ body {
     bottom: 125%;
     left: 50%;
     margin-left: -80px;
+    margin-right: 150px;
   }
   /* Popup arrow */
   .popup .popuptext::after {

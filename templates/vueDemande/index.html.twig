@@ -3,7 +3,7 @@
 {% block title %}Observation de la demande{% endblock %}
 
 {% block body %}
-<a href="{{ path('home') }}">
+<a href="{{ path('resultat') }}">
   <i class="fas fa-arrow-circle-left fa-2x"></i>
 </a>
 <h5 class="text-center">Détails de la demande :</h5>
@@ -28,6 +28,7 @@
         <br>
             <p class="text-center"><b>Description du problème : </b><br>{{ ticket.descriptionTicket }}</p>
         <br>
+        <hr class="shadow">
         <div class="row text-center">
             <div class="col-sm-4">
                 <p><b>Niveau : </b>{{ niveau.nomNiveau }}</p>
@@ -39,14 +40,23 @@
                 <p><b>Salle : </b>{{ salle.numeroSalle }}</p>
             </div>
         </div>
+        <hr class="shadow">
     </div>
 </div>
 <br>
 <div class="text-center">
 <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
-    <button type="button" class="btn btn-warning shadow" id="btn2">Résolu</button>
+    <button type="button" class="btn btn-warning shadow" id="btn2">Résolue</button>
 </a>
+<div class="popup" onclick="myFunction1()">
+        <span class="popuptext" id="myPopup">
+            Vous intervenez sur cette demande d'assistance.
+            <br>
+            N'oubliez pas de passer la demande en résolue lorsqu'elle sera terminée !
+            <br>
+        </span>
     <button type="button" class="btn btn-success shadow" id="btn1">Intervenir</button>
+</div>
 </div>
 <br>
 
@@ -58,7 +68,13 @@ $(document).ready(function () {
       $("#btn1").hide();
       $("#btn2").show();
   });
-  
   });
 </script>
+<script>
+function myFunction1() {
+    var popup = document.getElementById("myPopup");
+        popup.classList.toggle("show");
+    }
+</script>
+
 {% endblock %}

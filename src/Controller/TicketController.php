@@ -51,7 +51,7 @@ class TicketController extends AbstractController
         }
 
 
-        return $this->render('ticket/index.html.twig', [
+        return $this->render('demande/index.html.twig', [
             'form' => $form->createView(),
             'formSalle' => $formSalle->createView(),
             'formZone' => $formZone->createView()

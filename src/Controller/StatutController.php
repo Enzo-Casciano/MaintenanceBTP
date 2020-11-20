@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Intervention;
 use App\Entity\Materiel;
 use App\Entity\Niveau;
 use App\Entity\Salle;
@@ -45,7 +46,7 @@ class StatutController extends AbstractController
 
         $listeTickets = $statutRep->getTicketDetails();
 
-        return $this->render('statut/index.html.twig',[
+        return $this->render('tableDemandes/index.html.twig',[
                         'ticket' => $ticket,
                         'salle' => $salle,
                         'statut' => $statut,
@@ -92,6 +93,52 @@ class StatutController extends AbstractController
                         'niveau' => $niveau,
                         'zone' => $zone,
                         'materiel' => $materiel
+            ]);
+    }
+
+    public function showResultTicket($id){
+
+        $ticket = $this->getDoctrine()
+                       ->getRepository(Ticket::class)
+                       ->find($id);
+
+        $utilisateur = $this->getDoctrine()
+                            ->getRepository(Utilisateur::class)
+                            ->find($id);
+
+        $statut = $this->getDoctrine()
+                       ->getRepository(Statut::class)
+                       ->find($id);
+
+        $salle = $this->getDoctrine()
+                      ->getRepository(Salle::class)
+                      ->find($id);
+
+        $niveau = $this->getDoctrine()
+                      ->getRepository(Niveau::class)
+                      ->find($id);
+
+        $zone = $this->getDoctrine()
+                      ->getRepository(Zone::class)
+                      ->find($id);
+
+        $materiel = $this->getDoctrine()
+                      ->getRepository(Materiel::class)
+                      ->find($id);
+
+        $intervention = $this->getDoctrine()
+                             ->getRepository(Intervention::class)
+                             ->find($id);
+
+        return $this->render('vueResultat/index.html.twig',[
+                        'ticket' => $ticket,
+                        'utilisateur' => $utilisateur,
+                        'salle' => $salle,
+                        'statut' => $statut,
+                        'niveau' => $niveau,
+                        'zone' => $zone,
+                        'materiel' => $materiel,
+                        'intervention' => $intervention
             ]);
     }
 }

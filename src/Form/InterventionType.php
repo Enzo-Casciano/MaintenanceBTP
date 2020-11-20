@@ -14,7 +14,12 @@ class InterventionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('descriptionIntervention', TextareaType::class)
+            ->add('descriptionIntervention', TextareaType::class, [
+                'attr' => [
+                    'class' => ' shadow'
+                ]
+            ])
+
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success shadow mb-3'

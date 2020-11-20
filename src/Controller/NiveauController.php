@@ -26,7 +26,7 @@ class NiveauController extends AbstractController
             $em->flush();
         }
 
-        return $this->render('niveau/index.html.twig', [
+        return $this->render('accueil/index.html.twig', [
             'form' => $form->createView()
         ]);
     }
