@@ -43,10 +43,10 @@
 </div>
 <br>
 <div class="text-center">
-{# <a href="{{ path('intervention') }}"> #}
+<a href="{{ path('intervention',{ 'id': ticket.id }) }}">
     <button type="button" class="btn btn-warning shadow" id="btn2">Résolu</button>
-{# </a> #}
-    <button type="button" class="btn btn-success shadow" id="btn1">Commencer</button>
+</a>
+    <button type="button" class="btn btn-success shadow" id="btn1">Intervenir</button>
 </div>
 <br>
 

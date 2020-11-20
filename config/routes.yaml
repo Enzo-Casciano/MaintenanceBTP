@@ -24,7 +24,7 @@ resultat:
 
 
 vueDemande:
-  path: /ticket/{id}
+  path: /vueDemande/{id}
   controller: App\Controller\StatutController::showOneTicket
 
 ticket:

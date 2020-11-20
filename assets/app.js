@@ -12,12 +12,3 @@ import './styles/app.css';
 // import $ from 'jquery';
 
 console.log('Hello Webpack Encore! Edit me in assets/app.js');
-
-
-    $(document).ready(function () {
-        $("#btn2").click(function(){
-            $("#btn1").prop("disabled", true);
-            $("#btn2").prop("disabled", false);
-        });
-        
-        });
