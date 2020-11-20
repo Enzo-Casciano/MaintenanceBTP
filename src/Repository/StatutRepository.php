@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Statut;
+use App\Entity\Ticket;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,7 +16,20 @@ class StatutRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Statut::class);
+        parent::__construct($registry, Ticket::class);
+    }
+
+    public function getTicketDetails()
+    {
+        $qb = $this->createQueryBuilder('t')
+                   ->join('t.utilisateur', 'u')
+                   ->addSelect('u')
+                   ->join('t.statut', 's')
+                   ->addSelect('s')
+                   ->join('t.salles', 'sa')
+                   ->addSelect('sa');
+        return $qb->getQuery()
+                  ->getResult();
     }
 
     // /**

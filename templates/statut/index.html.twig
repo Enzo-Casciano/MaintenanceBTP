@@ -5,59 +5,31 @@
 {% block body %}
 <a href="{{ path('home') }}">
   <i class="fas fa-arrow-circle-left fa-2x"></i>
-</a>
-<br><br>
-{# {% for t in ticket %}
-   | {{ t.titreTicket }} - 
-   | {{ t.dateTicket|date('Y-m-d') }} -
-{% endfor %}
-
-{% for user in utilisateur %}
-    {{ user.nomUtilisateur }}    
-    {{ user.prenomUtilisateur }}    
-{% endfor %}
-
-{% for stat in statut %}
-    {{ stat.nomStatut }} - 
-    {{ stat.criticiteStatut }} - 
-{% endfor %}
-
-{% for s in salle %}
-    {{ s.numeroSalle }} - 
-{% endfor %} #}
-
-
-<table class="table table-striped table-bordered table-sm" data-search="true" data-pagination="true" data-page-size="10">
+</a><br><br>
+<table class="table">
   <thead class="thead-light">
     <tr>
-      <th  data-sortable="true">Titre</th>
-      <th  data-sortable="true">Date demande</th>
-      <th  data-sortable="true">Demandeur</th>
-      <th  data-sortable="true">Statut</th>
-      <th  data-sortable="true">Criticité</th>
-      <th  data-sortable="true">Salle</th>
-      <th  data-sortable="true">Détails</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Date demande</th>
+      <th scope="col">Demandeur</th>
+      <th scope="col">Statut</th>
+      <th scope="col">Criticité</th>
+      {# <th scope="col">Salle</th> #}
+      <th scope="col">Détails</th>
     </tr>
   </thead>
   <tbody>
-     {% for t in ticket %}
-    <tr>
-        <th scope="row">{{ t.titreTicket }}</th>
-        <td>{{ t.dateTicket|date('Y-m-d') }}</td>
-            {% for user in utilisateur %}
-                <td>{{ user.prenomUtilisateur }} {{ user.nomUtilisateur }}</td>
-                    {% for stat in statut %}
-                        <td>{{ stat.nomStatut }}</td>
-                        <td>{{ stat.criticiteStatut }}</td>
-                            {% for s in salle %}
-                                <td>{{ s.numeroSalle }}</td>
-                                <td><button type="button" class="btn btn-primary">Voir détails</button></td>
-                                </tr>
-                            {% endfor %}
-                    {% endfor %}
-            {% endfor %}
-    {% endfor %}  
-  </tbody>
+{% for ticket in listeTicket %}
+<tr>
+<td>{{ ticket.titreTicket }}</td>
+<td>{{ ticket.dateTicket|date('d-m-Y') }}</td>
+<td>{{ ticket.utilisateur.nomUtilisateur }} {{ticket.utilisateur.prenomUtilisateur }}</td>
+<td>{{ ticket.statut.nomStatut }}</td>
+<td>{{ ticket.statut.criticiteStatut }}</td>
+{# <td>{{ ticket.salles.numeroSalle }}</td> #}
+<td><button type="button" class="btn btn-primary">Voir détails</button></td>
+</tr>
+{% endfor %}
+</tbody>
 </table>
-
 {% endblock %}

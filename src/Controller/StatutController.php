@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\StatutRepository;
 
 class StatutController extends AbstractController
 {
@@ -24,7 +25,7 @@ class StatutController extends AbstractController
         ]);
     }
 
-    public function showTicket(){
+    public function showTicket(StatutRepository $statutRep){
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -42,13 +43,14 @@ class StatutController extends AbstractController
                       ->getRepository(Utilisateur::class)
                       ->findAll();
 
-
+        $listeTickets = $statutRep->getTicketDetails();
 
         return $this->render('statut/index.html.twig',[
                         'ticket' => $ticket,
                         'salle' => $salle,
                         'statut' => $statut,
-                        'utilisateur' => $user
+                        'utilisateur' => $user,
+                        'listeTicket' => $listeTickets
             ]);
     }
 
