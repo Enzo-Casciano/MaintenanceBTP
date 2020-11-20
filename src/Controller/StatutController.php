@@ -55,7 +55,7 @@ class StatutController extends AbstractController
             ]);
     }
 
-    public function showOneTicket($id){
+    public function showOneTicket($id, StatutRepository $statutRep){
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -85,6 +85,8 @@ class StatutController extends AbstractController
                       ->getRepository(Materiel::class)
                       ->find($id);
 
+        $changementStatutAttente = $statutRep->updateStatutTicket($id, 4);
+
         return $this->render('vueDemande/index.html.twig',[
                         'ticket' => $ticket,
                         'utilisateur' => $utilisateur,
@@ -92,7 +94,8 @@ class StatutController extends AbstractController
                         'statut' => $statut,
                         'niveau' => $niveau,
                         'zone' => $zone,
-                        'materiel' => $materiel
+                        'materiel' => $materiel,
+                        'changementStatutAttente' => $changementStatutAttente,
             ]);
     }
 

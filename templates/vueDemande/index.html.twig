@@ -22,7 +22,7 @@
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
                 <p><b>Matériel(s) défectueux : </b>{{ materiel.nomMateriel }}</p>
-                <p><b>Statut: </b>{{ ticket.statut.nomStatut }}</p>
+                <p id="stat"><b>Statut: </b>{{ ticket.statut.nomStatut }}</p>
             </div>
         </div>
         <br>
@@ -67,6 +67,7 @@ $(document).ready(function () {
   $("#btn1").click(function(){
       $("#btn1").hide();
       $("#btn2").show();
+      $changementStatutAttente
   });
   });
 </script>
