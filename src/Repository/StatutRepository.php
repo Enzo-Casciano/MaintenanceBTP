@@ -44,6 +44,21 @@ class StatutRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function getTicketDetailsAttente($nomStatut)
+    {
+        $qb = $this->createQueryBuilder('t')
+                   ->join('t.utilisateur', 'u')
+                   ->addSelect('u')
+                   ->join('t.statut', 's')
+                   ->addSelect('s')
+                   ->join('t.salles', 'sa')
+                   ->addSelect('sa')
+                   ->where('s.nomStatut = ?1')
+                   ->setParameter(1, $nomStatut);
+        return $qb->getQuery()
+                  ->getResult();
+    }
+
     // /**
     //  * @return Statut[] Returns an array of Statut objects
     //  */
