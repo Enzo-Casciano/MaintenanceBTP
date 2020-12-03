@@ -19,7 +19,7 @@ class StatutRepository extends ServiceEntityRepository
         parent::__construct($registry, Ticket::class);
     }
 
-    public function getTicketDetails()
+    public function getTicketsDetails($nomStatut)
     {
         $qb = $this->createQueryBuilder('t')
                    ->join('t.utilisateur', 'u')
@@ -27,7 +27,9 @@ class StatutRepository extends ServiceEntityRepository
                    ->join('t.statut', 's')
                    ->addSelect('s')
                    ->join('t.salles', 'sa')
-                   ->addSelect('sa');
+                   ->addSelect('sa')
+                   ->where('s.nomStatut != ?1')
+                   ->setParameter(1, $nomStatut);
         return $qb->getQuery()
                   ->getResult();
     }
@@ -44,7 +46,7 @@ class StatutRepository extends ServiceEntityRepository
         ->getResult();
     }
 
-    public function getTicketDetailsAttente($nomStatut)
+    public function getTicketsAttente($nomStatut)
     {
         $qb = $this->createQueryBuilder('t')
                    ->join('t.utilisateur', 'u')

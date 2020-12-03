@@ -20,12 +20,16 @@ salle:
 # ---------------------------------------------------
 resultat:
   path: /resultat
-  controller: App\Controller\StatutController::showTicket
-
+  controller: App\Controller\StatutController::showTickets
+# ---------------------------------------------------
+validationdemande:
+  path: /validationDemande
+  controller: App\Controller\StatutController::showTicketsAdmin
+# ---------------------------------------------------
 vueDemande:
   path: /vueDemande/{id}
   controller: App\Controller\StatutController::showOneTicket
-
+# ---------------------------------------------------
 vueResultat:
   path: /vueResultat/{id}
   controller: App\Controller\StatutController::showResultTicket
