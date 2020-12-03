@@ -43,6 +43,14 @@
         <hr class="shadow">
     </div>
 </div>
+
+<div class="card mx-auto shadow" style="width: 1000px;" id="finish">
+    <div class="card-header">
+    </div>
+    <div class="card-body">
+        {# <p><b>Description de l'intervention :</b><br>{{  }}</p> #}
+    </div>
+</div>
 <br>
 <div class="text-center">
 <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
@@ -59,10 +67,11 @@
 </div>
 </div>
 <br>
-<data value="" id="Résolu"></data>
+<data value="{{ ticket.statut.nomStatut }}" id="resolu"></data>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
-
+  var $statut = document.getElementById("resolu").value;
+$("#finish").hide();
 
 $(document).ready(function () {
     $('#btn2').hide();
@@ -72,6 +81,11 @@ $(document).ready(function () {
       $changementStatutAttente
   });
 
+  if($statut == "Résolue"){
+      $("#finish").show();
+      $("#btn1").hide();
+      $("#btn2").hide();
+  }
 // Faire la recuperation du statut de la demande
 // Faire une condition pour cacher le bouton si le statut = Résolue
 
