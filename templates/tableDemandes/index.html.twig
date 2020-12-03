@@ -24,7 +24,7 @@
 <td>{{ ticket.dateTicket|date('d-m-Y') }}</td>
 <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
 <td>{{ ticket.statut.nomStatut }}</td>
-<td>{{ criticite.nomCriticite }}</td>
+<td>{{ ticket.criticite.nomCriticite }}</td>
 <td>
   <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
     <button type="button" class="btn btn-primary">Voir détails</button>
