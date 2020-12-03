@@ -46,9 +46,10 @@
 
 <div class="card mx-auto shadow" style="width: 1000px;" id="finish">
     <div class="card-header">
+        <p><b>Technicien chargé de l'intervention : </b>{# Récupéré le nom du technicien avec la connexion #} </p>
     </div>
     <div class="card-body">
-        {# <p><b>Description de l'intervention :</b><br>{{  }}</p> #}
+        <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionIntervention }}</p>
     </div>
 </div>
 <br>
@@ -67,6 +68,7 @@
 </div>
 </div>
 <br>
+
 <data value="{{ ticket.statut.nomStatut }}" id="resolu"></data>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>

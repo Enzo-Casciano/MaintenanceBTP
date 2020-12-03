@@ -69,3 +69,7 @@ body {
 .bd-callout-primary {
   border-left-color: #0026ff
 }
+
+body{
+  overflow-x: hidden;
+}
