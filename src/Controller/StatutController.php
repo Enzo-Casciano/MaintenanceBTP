@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Criticite;
 use App\Entity\Intervention;
 use App\Entity\Materiel;
 use App\Entity\Niveau;
@@ -43,10 +44,15 @@ class StatutController extends AbstractController
         $user = $this->getDoctrine()
                       ->getRepository(Utilisateur::class)
                       ->findAll();
+        
+        $criticite = $this->getDoctrine()
+                      ->getRepository(Criticite::class)
+                      ->findAll();
 
         $listeTickets = $statutRep->getTicketDetails();
 
         return $this->render('tableDemandes/index.html.twig',[
+                        'criticite' => $criticite,
                         'ticket' => $ticket,
                         'salle' => $salle,
                         'statut' => $statut,
@@ -85,9 +91,15 @@ class StatutController extends AbstractController
                       ->getRepository(Materiel::class)
                       ->find($id);
 
+        $criticite = $this->getDoctrine()
+                          ->getRepository(Criticite::class)
+                          ->find($id);
+
+
         $changementStatutAttente = $statutRep->updateStatutTicket($id, 4);
 
         return $this->render('vueDemande/index.html.twig',[
+                        'criticite' => $criticite,
                         'ticket' => $ticket,
                         'utilisateur' => $utilisateur,
                         'salle' => $salle,

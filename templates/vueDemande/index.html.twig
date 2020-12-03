@@ -17,7 +17,7 @@
             <div class="col-sm-6">
                 <p><b>Demandeur : </b>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
-                <p><b>Criticité : </b>{{ ticket.statut.criticiteStatut }}</p>
+                <p><b>Criticité : </b>{{ criticite.nomCriticite }}</p> {# Modifier par l'entity Criticité #}
             </div>
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
@@ -59,9 +59,11 @@
 </div>
 </div>
 <br>
-
+<data value="" id="Résolu"></data>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+
+
 $(document).ready(function () {
     $('#btn2').hide();
   $("#btn1").click(function(){
@@ -69,6 +71,10 @@ $(document).ready(function () {
       $("#btn2").show();
       $changementStatutAttente
   });
+
+// Faire la recuperation du statut de la demande
+// Faire une condition pour cacher le bouton si le statut = Résolue
+
   });
 </script>
 <script>

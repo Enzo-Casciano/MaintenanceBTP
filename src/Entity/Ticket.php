@@ -64,11 +64,19 @@ class Ticket
      */
     private $salles;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Criticite::class, inversedBy="tickets")
+     */
+    private $criticite;
+
+
+
 
     public function __construct()
     {
         $this->materiels = new ArrayCollection();
         $this->salles = new ArrayCollection();
+        $this->criticites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,5 +222,16 @@ class Ticket
         return $this;
     }
 
+    public function getCriticite(): ?Criticite
+    {
+        return $this->criticite;
+    }
+
+    public function setCriticite(?Criticite $criticite): self
+    {
+        $this->criticite = $criticite;
+
+        return $this;
+    }
 
 }

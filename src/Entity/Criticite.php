@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\StatutRepository;
+use App\Repository\CriticiteRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=StatutRepository::class)
+ * @ORM\Entity(repositoryClass=CriticiteRepository::class)
  */
-class Statut
+class Criticite
 {
     /**
      * @ORM\Id
@@ -20,12 +20,12 @@ class Statut
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=255)
      */
-    private $nomStatut;
+    private $nomCriticite;
 
     /**
-     * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="statut")
+     * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="criticite")
      */
     private $tickets;
 
@@ -34,19 +34,21 @@ class Statut
         $this->tickets = new ArrayCollection();
     }
 
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNomStatut(): ?string
+    public function getNomCriticite(): ?string
     {
-        return $this->nomStatut;
+        return $this->nomCriticite;
     }
 
-    public function setNomStatut(string $nomStatut): self
+    public function setNomCriticite(string $nomCriticite): self
     {
-        $this->nomStatut = $nomStatut;
+        $this->nomCriticite = $nomCriticite;
 
         return $this;
     }
@@ -63,7 +65,7 @@ class Statut
     {
         if (!$this->tickets->contains($ticket)) {
             $this->tickets[] = $ticket;
-            $ticket->setStatut($this);
+            $ticket->setCriticite($this);
         }
 
         return $this;
@@ -73,11 +75,12 @@ class Statut
     {
         if ($this->tickets->removeElement($ticket)) {
             // set the owning side to null (unless already changed)
-            if ($ticket->getStatut() === $this) {
-                $ticket->setStatut(null);
+            if ($ticket->getCriticite() === $this) {
+                $ticket->setCriticite(null);
             }
         }
 
         return $this;
     }
+
 }
