@@ -27,7 +27,7 @@ class StatutController extends AbstractController
         ]);
     }
 
-    public function showTicket(StatutRepository $statutRep){
+    public function showTickets(StatutRepository $statutRep){
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -49,7 +49,7 @@ class StatutController extends AbstractController
                       ->getRepository(Criticite::class)
                       ->findAll();
 
-        $listeTickets = $statutRep->getTicketDetails();
+        $listeTickets = $statutRep->getTicketsDetails('En attente');
 
         return $this->render('tableDemandes/index.html.twig',[
                         'criticite' => $criticite,
@@ -156,4 +156,16 @@ class StatutController extends AbstractController
                         'intervention' => $intervention
             ]);
     }
+
+    public function showTicketsAdmin(StatutRepository $statutRep){
+
+        $listeTicketsAttente = $statutRep->getTicketsAttente('En attente');
+
+        return $this->render('tableDemandesAdmin/index.html.twig',[
+                        
+                        'listeTicketsAttente' => $listeTicketsAttente
+            ]);
+    }
 }
+
+
