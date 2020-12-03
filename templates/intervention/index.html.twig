@@ -17,7 +17,7 @@
             <div class="col-sm-6">
                 <p><b>Demandeur : </b>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
-                <p><b>Criticité : </b>{{ ticket.statut.criticiteStatut }}</p>
+                <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p>
             </div>
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
