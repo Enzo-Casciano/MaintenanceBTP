@@ -96,7 +96,7 @@ class StatutController extends AbstractController
                           ->find($id);
 
 
-        $changementStatutAttente = $statutRep->updateStatutTicket($id, 4);
+        //$changementStatutAttente = $statutRep->updateStatutTicket($id, 2);
 
         return $this->render('vueDemande/index.html.twig',[
                         'criticite' => $criticite,
@@ -107,7 +107,7 @@ class StatutController extends AbstractController
                         'niveau' => $niveau,
                         'zone' => $zone,
                         'materiel' => $materiel,
-                        'changementStatutAttente' => $changementStatutAttente,
+                        //'changementStatutAttente' => $changementStatutAttente,
             ]);
     }
 

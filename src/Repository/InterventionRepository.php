@@ -19,6 +19,16 @@ class InterventionRepository extends ServiceEntityRepository
         parent::__construct($registry, Intervention::class);
     }
 
+
+    public function getInterventionTicket()
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->orderBy('i.id', 'DESC')
+            ->getQuery()
+            ->setMaxResults(1);
+        return $qb->getResult();
+    }
+
     // /**
     //  * @return Intervention[] Returns an array of Intervention objects
     //  */

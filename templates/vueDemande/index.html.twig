@@ -17,7 +17,7 @@
             <div class="col-sm-6">
                 <p><b>Demandeur : </b>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
-                <p><b>Criticité : </b>{{ criticite.nomCriticite }}</p> {# Modifier par l'entity Criticité #}
+                <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p> {# Modifier par l'entity Criticité #}
             </div>
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
@@ -69,7 +69,7 @@ $(document).ready(function () {
   $("#btn1").click(function(){
       $("#btn1").hide();
       $("#btn2").show();
-      $changementStatutAttente
+      //$changementStatutAttente
   });
 
 // Faire la recuperation du statut de la demande

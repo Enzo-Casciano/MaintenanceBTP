@@ -34,14 +34,26 @@ class StatutRepository extends ServiceEntityRepository
                   ->getResult();
     }
 
-    public function updateStatutTicket($idticket, $idstatut)
+    public function updateStatutTicket($idTicket, $idStatut)
     {
         return $this->createQueryBuilder('t')
         ->update()
         ->set('t.statut', '?1')
         ->where('t.id = ?2')
-        ->setParameter(1, $idstatut)
-        ->setParameter(2, $idticket)
+        ->setParameter(1, $idStatut)
+        ->setParameter(2, $idTicket)
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function updateInterventionTicket($idTicket, $idIntervention)
+    {
+        return $this->createQueryBuilder('t')
+        ->update()
+        ->set('t.intervention', '?1')
+        ->where('t.id = ?2')
+        ->setParameter(1, $idIntervention)
+        ->setParameter(2, $idTicket)
         ->getQuery()
         ->getResult();
     }
@@ -57,21 +69,6 @@ class StatutRepository extends ServiceEntityRepository
                    ->addSelect('c')
                    ->where('s.nomStatut = ?1')
                    ->setParameter(1, $nomStatut);
-        return $qb->getQuery()
-                  ->getResult();
-    }
-
-    public function getStatutTickets($idticket)
-    {
-        $qb = $this->createQueryBuilder('t')
-                   ->join('t.utilisateur', 'u')
-                   ->addSelect('u')
-                   ->join('t.statut', 's')
-                   ->addSelect('s')
-                   ->join('t.criticite', 'c')
-                   ->addSelect('c')
-                   ->where('t.id = ?1')
-                   ->setParameter(1, $idticket);
         return $qb->getQuery()
                   ->getResult();
     }
