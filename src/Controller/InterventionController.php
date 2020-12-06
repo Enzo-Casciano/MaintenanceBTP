@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Criticite;
 use App\Entity\Intervention;
 use App\Entity\Materiel;
 use App\Entity\Niveau;
@@ -68,12 +69,16 @@ class InterventionController extends AbstractController
                          ->getRepository(Materiel::class)
                          ->find($id);
 
+        $criticite = $this->getDoctrine()
+                         ->getRepository(Criticite::class)
+                         ->find($id);
         $changementStatutEnCours = $statutRep->updateStatutTicket($id, 3);
 
         $updateInterventionTicket = $statutRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
 
     return $this->render('intervention/index.html.twig',[
          'form' => $form->createView(),
+         'criticite' => $criticite,
          'ticket' => $ticket,
          'utilisateur' => $utilisateur,
          'salle' => $salle,
