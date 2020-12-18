@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Criticite;
 use App\Entity\Salle;
 use App\Entity\Ticket;
+use App\Repository\CriticiteRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -65,6 +68,19 @@ class TicketType extends AbstractType
                 'allow_delete' => true,
                 'delete_empty' => true            
                 ])
+
+            ->add('criticite', ChoiceType::class, [
+                    'choices'  => [
+                        'Faible' => 1,
+                        'Modéré' => 2,
+                        'Critique' => 3,
+                    ],
+                ])
+
+            // ->add('criticite', EntityType::class, [
+            //         'class'       => Criticite::class,
+            //         'choice_label' => 'nomCriticite',
+            //       ])
 
             ->add('save', SubmitType::class, [
                 'attr' => [

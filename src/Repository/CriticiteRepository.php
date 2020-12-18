@@ -19,6 +19,14 @@ class CriticiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Criticite::class);
     }
 
+    public function findAllCriticite(){
+        return $this->createQueryBuilder('c')
+        ->orderBy('c.nomCriticite', 'ASC')
+        ->getQuery()
+        ->execute()
+        ;
+    }
+
     // /**
     //  * @return Criticite[] Returns an array of Criticite objects
     //  */

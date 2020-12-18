@@ -38,7 +38,7 @@ class Ticket
      * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="tickets")
      */
     private $utilisateur;
-
+    
     /**
      * @ORM\OneToOne(targetEntity=Intervention::class, cascade={"persist", "remove"})
      */
@@ -72,6 +72,8 @@ class Ticket
 
 
 
+
+
     public function __construct()
     {
         $this->materiels = new ArrayCollection();
@@ -92,34 +94,136 @@ class Ticket
     public function setTitreTicket(string $titreTicket): self
     {
         $this->titreTicket = $titreTicket;
-
+        
         return $this;
     }
-
+    
     public function getDescriptionTicket(): ?string
     {
         return $this->descriptionTicket;
     }
-
+    
     public function setDescriptionTicket(string $descriptionTicket): self
     {
         $this->descriptionTicket = $descriptionTicket;
-
+        
         return $this;
     }
-
+    
     public function getDateTicket(): ?\DateTimeInterface
     {
         return $this->dateTicket;
     }
-
+    
     public function setDateTicket(\DateTimeInterface $dateTicket): self
     {
         $this->dateTicket = $dateTicket;
-
+        
         return $this;
     }
-
+    
+    public function getIntervention(): ?Intervention
+    {
+        return $this->intervention;
+    }
+    
+    public function setIntervention(?Intervention $intervention): self
+    {
+        $this->intervention = $intervention;
+        
+        return $this;
+    }
+    
+    public function getStatut(): ?Statut
+    {
+        return $this->statut;
+    }
+    
+    public function setStatut(?Statut $statut): self
+    {
+        $this->statut = $statut;
+        
+        return $this;
+    }
+    
+    /**
+     * @return Collection|Materiel[]
+     */
+    public function getMateriels(): Collection
+    {
+        return $this->materiels;
+    }
+    
+    public function addMateriel(Materiel $materiel): self
+    {
+        if (!$this->materiels->contains($materiel)) {
+            $this->materiels[] = $materiel;
+            $materiel->addTicket($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeMateriel(Materiel $materiel): self
+    {
+        if ($this->materiels->removeElement($materiel)) {
+            $materiel->removeTicket($this);
+        }
+        
+        return $this;
+    }
+    
+    public function getCategorieTicket(): ?string
+    {
+        return $this->categorieTicket;
+    }
+    
+    public function setCategorieTicket(string $categorieTicket): self
+    {
+        $this->categorieTicket = $categorieTicket;
+        
+        return $this;
+    }
+    
+    /**
+     * @return Collection|Salle[]
+     */
+    public function getSalles(): Collection
+    {
+        return $this->salles;
+    }
+    
+    public function addSalle(Salle $salle): self
+    {
+        if (!$this->salles->contains($salle)) {
+            $this->salles[] = $salle;
+            $salle->addTicket($this);
+        }
+        
+        return $this;
+    }
+    
+    public function removeSalle(Salle $salle): self
+    {
+        if ($this->salles->removeElement($salle)) {
+            $salle->removeTicket($this);
+        }
+        
+        return $this;
+    }
+    
+    public function getCriticite(): ?Criticite
+    {
+        return $this->criticite;
+    }
+    
+    public function setCriticite(?Criticite $criticite): self
+    {
+        $this->criticite = $criticite;
+        
+        return $this;
+    }
+    
     public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
@@ -131,107 +235,7 @@ class Ticket
 
         return $this;
     }
-
-    public function getIntervention(): ?Intervention
-    {
-        return $this->intervention;
-    }
-
-    public function setIntervention(?Intervention $intervention): self
-    {
-        $this->intervention = $intervention;
-
-        return $this;
-    }
-
-    public function getStatut(): ?Statut
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?Statut $statut): self
-    {
-        $this->statut = $statut;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Materiel[]
-     */
-    public function getMateriels(): Collection
-    {
-        return $this->materiels;
-    }
-
-    public function addMateriel(Materiel $materiel): self
-    {
-        if (!$this->materiels->contains($materiel)) {
-            $this->materiels[] = $materiel;
-            $materiel->addTicket($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMateriel(Materiel $materiel): self
-    {
-        if ($this->materiels->removeElement($materiel)) {
-            $materiel->removeTicket($this);
-        }
-
-        return $this;
-    }
-
-    public function getCategorieTicket(): ?string
-    {
-        return $this->categorieTicket;
-    }
-
-    public function setCategorieTicket(string $categorieTicket): self
-    {
-        $this->categorieTicket = $categorieTicket;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Salle[]
-     */
-    public function getSalles(): Collection
-    {
-        return $this->salles;
-    }
-
-    public function addSalle(Salle $salle): self
-    {
-        if (!$this->salles->contains($salle)) {
-            $this->salles[] = $salle;
-            $salle->addTicket($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSalle(Salle $salle): self
-    {
-        if ($this->salles->removeElement($salle)) {
-            $salle->removeTicket($this);
-        }
-
-        return $this;
-    }
-
-    public function getCriticite(): ?Criticite
-    {
-        return $this->criticite;
-    }
-
-    public function setCriticite(?Criticite $criticite): self
-    {
-        $this->criticite = $criticite;
-
-        return $this;
-    }
+    
+    
 
 }

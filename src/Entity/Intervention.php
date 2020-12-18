@@ -18,24 +18,15 @@ class Intervention
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $descriptionIntervention;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $dateDebutIntervention;
+    private $descriptionRefus;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $dateFinIntervention;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Utilisateur::class, inversedBy="interventions")
-     */
-    private $utilisateur;
 
     public function getId(): ?int
     {
@@ -54,39 +45,15 @@ class Intervention
         return $this;
     }
 
-    public function getDateDebutIntervention(): ?\DateTimeInterface
+    public function getDescriptionRefus(): ?string
     {
-        return $this->dateDebutIntervention;
+        return $this->descriptionRefus;
     }
-
-    public function setDateDebutIntervention(\DateTimeInterface $dateDebutIntervention): self
+    
+    public function setDescriptionRefus(?string $descriptionRefus): self
     {
-        $this->dateDebutIntervention = $dateDebutIntervention;
-
-        return $this;
-    }
-
-    public function getDateFinIntervention(): ?\DateTimeInterface
-    {
-        return $this->dateFinIntervention;
-    }
-
-    public function setDateFinIntervention(\DateTimeInterface $dateFinIntervention): self
-    {
-        $this->dateFinIntervention = $dateFinIntervention;
-
-        return $this;
-    }
-
-    public function getUtilisateur(): ?utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?utilisateur $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
+        $this->descriptionRefus = $descriptionRefus;
+    
         return $this;
     }
 }

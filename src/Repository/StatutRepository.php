@@ -65,8 +65,6 @@ class StatutRepository extends ServiceEntityRepository
                    ->addSelect('u')
                    ->join('t.statut', 's')
                    ->addSelect('s')
-                   ->join('t.criticite', 'c')
-                   ->addSelect('c')
                    ->where('s.nomStatut = ?1')
                    ->setParameter(1, $nomStatut);
         return $qb->getQuery()

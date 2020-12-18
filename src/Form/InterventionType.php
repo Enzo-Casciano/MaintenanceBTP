@@ -20,6 +20,12 @@ class InterventionType extends AbstractType
                 ]
             ])
 
+            ->add('descriptionRefus', TextareaType::class, [
+                'attr' => [
+                    'class' => ' shadow'
+                ]
+            ])
+
             ->add('save', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-success shadow mb-3'

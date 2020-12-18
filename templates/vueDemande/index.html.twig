@@ -3,9 +3,16 @@
 {% block title %}Observation de la demande{% endblock %}
 
 {% block body %}
-<a href="{{ path('resultat') }}">
-  <i class="fas fa-arrow-circle-left fa-2x"></i>
-</a>
+{% if ticket.statut.id == 1 %}
+   <a href="{{ path('validationdemande') }}">
+        <i class="fas fa-arrow-circle-left fa-2x"></i>
+    </a>
+{% endif %}
+{% if ticket.statut.id == 2 or ticket.statut.id == 3 %}
+    <a href="{{ path('resultat') }}">
+        <i class="fas fa-arrow-circle-left fa-2x"></i>
+    </a>
+{% endif %}
 <h5 class="text-center">Détails de la demande :</h5>
 
 <div class="card mx-auto shadow" style="width: 1000px;">
@@ -17,7 +24,9 @@
             <div class="col-sm-6">
                 <p><b>Demandeur : </b>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
+                {% if ticket.statut.id != 1 %}
                 <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p> {# Modifier par l'entity Criticité #}
+                {% endif %}
             </div>
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
@@ -42,33 +51,63 @@
         </div>
         <hr class="shadow">
     </div>
+{% if ticket.statut.id == 1 %}    
+    <div class="card-footer text-center">
+        <div class="dropdown">
+            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Criticité
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Faible</button>
+                <button class="dropdown-item" type="button">Modéré</button>
+                <button class="dropdown-item" type="button">Critique</button>
+            </div>
+        </div>
+    </div> 
+{% endif %}
 </div>
 
 <div class="card mx-auto shadow" style="width: 1000px;" id="finish">
-    <div class="card-header">
-        <p><b>Technicien chargé de l'intervention : </b>{# Récupéré le nom du technicien avec la connexion #} </p>
-    </div>
-    <div class="card-body">
-        <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionIntervention }}</p>
-    </div>
+{% if ticket.statut.id == 3 %} 
+    {% if ticket.intervention.descriptionIntervention != null %}
+        <div class="card-body">
+            <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionIntervention }}</p>
+        </div>
+    {% endif %}
+{% endif %}
 </div>
+
+<div class="card mx-auto shadow" style="width: 1000px;" id="refuser">
+{% if ticket.statut.id == 4 %} 
+    {% if ticket.intervention.descriptionRefus != null %}
+        <div class="card-body">
+            <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionRefus }}</p>
+        </div>
+    {% endif %}
+{% endif %}
+</div>
+
 <br>
 <div class="text-center">
-<a href="{{ path('intervention',{ 'id': ticket.id }) }}">
-    <button type="button" class="btn btn-warning shadow" id="btn2">Résolue</button>
-</a>
-<div class="popup" onclick="myFunction1()">
-        <span class="popuptext" id="myPopup">
-            Vous intervenez sur cette demande d'assistance.
-            <br>
-            N'oubliez pas de passer la demande en résolue lorsqu'elle sera terminée !
-            <br>
-        </span>
-    <button type="button" class="btn btn-success shadow" id="btn1">Intervenir</button>
-</div>
+{% if ticket.statut.id == 2 %}
+    <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
+        <button type="button" class="btn btn-warning shadow" id="btn2">Résolue</button>
+    </a>
+{% endif %}
+{% if ticket.statut.id == 1 %}
+    {# {{ form_start(form) }} #}
+        {# {{ form_widget(ticket.criticite) }} #}
+    <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
+        <button type="button" class="btn btn-danger shadow" id="refus">Refuser</button>
+    </a>
+    <a href="{{ path('validationdemande') }}">
+        <button type="button" class="btn btn-success shadow" id="valid">Valider</button>
+    </a>
+    {# {{ form_end(form, {'render_rest': false}) }} #}
+{% endif %}
+    
 </div>
 <br>
-
 <data value="{{ ticket.statut.nomStatut }}" id="resolu"></data>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
@@ -76,16 +115,8 @@
 $("#finish").hide();
 
 $(document).ready(function () {
-    $('#btn2').hide();
-  $("#btn1").click(function(){
-      $("#btn1").hide();
-      $("#btn2").show();
-      //$changementStatutAttente
-  });
-
   if($statut == "Résolue"){
       $("#finish").show();
-      $("#btn1").hide();
       $("#btn2").hide();
   }
 // Faire la recuperation du statut de la demande

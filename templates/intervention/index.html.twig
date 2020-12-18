@@ -46,28 +46,52 @@
 <br>
 {{ form_start(form) }}
 <b>
+{% if ticket.statut.id == 2 %}
 <div class="text-center mx-auto" style="width: 1000px">
     {{ form_row(form.descriptionIntervention, {
         'label' : 'Description de l\'intervention :'
     }) }}
 </div>
-</b>
-
-
-<div class="text-center" id="confirmer">
+<div class="text-center" id="confirm1">
     {{ form_row(form.save, {
         'label': 'Confirmer'
     })}}
-
-{{ form_end(form,{'render_rest': false}) }}
-<br>
-<br>
+</div>
 <script>
 $(document).ready(function () {
-    $("#confirmer").click(function(){
+    $("#confirm1").click(function(){
         $changementStatutEnCours
         $updateInterventionTicket
     });
 });
 </script>
+{% endif %}
+</b>
+
+<b>
+{% if ticket.statut.id == 1 %}
+<div class="text-center mx-auto" style="width: 1000px">
+    {{ form_row(form.descriptionRefus, {
+        'label' : 'Description du refus de cette demande :'
+    }) }}
+</div>
+<div class="text-center" id="confirm2">
+    {{ form_row(form.save, {
+        'label': 'Confirmer'
+    })}}
+</div>
+<script>
+$(document).ready(function () {
+    $("#confirm2").click(function(){
+        $changementStatutEnCours
+        $updateInterventionTicket
+    });
+});
+</script>
+{% endif %}
+</b>
+{{ form_end(form,{'render_rest': false}) }}
+<br>
+<br>
+
 {% endblock %}

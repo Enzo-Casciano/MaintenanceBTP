@@ -11,6 +11,7 @@ use App\Entity\Statut;
 use App\Entity\Ticket;
 use App\Entity\Utilisateur;
 use App\Entity\Zone;
+use App\Form\CriticiteType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,10 +96,13 @@ class StatutController extends AbstractController
                           ->getRepository(Criticite::class)
                           ->find($id);
 
+        $form = $this->createForm(CriticiteType::class, $criticite);
+
 
         //$changementStatutAttente = $statutRep->updateStatutTicket($id, 2);
 
         return $this->render('vueDemande/index.html.twig',[
+                        'form' => $form->createView(),
                         'criticite' => $criticite,
                         'ticket' => $ticket,
                         'utilisateur' => $utilisateur,
