@@ -99,7 +99,7 @@ class StatutController extends AbstractController
         $form = $this->createForm(CriticiteType::class, $criticite);
 
 
-        //$changementStatutAttente = $statutRep->updateStatutTicket($id, 2);
+        $changementStatutAttente = $statutRep->updateStatutTicket($id, 2);
 
         return $this->render('vueDemande/index.html.twig',[
                         'form' => $form->createView(),
@@ -111,7 +111,7 @@ class StatutController extends AbstractController
                         'niveau' => $niveau,
                         'zone' => $zone,
                         'materiel' => $materiel,
-                        //'changementStatutAttente' => $changementStatutAttente,
+                        'changementStatutAttente' => $changementStatutAttente,
             ]);
     }
 
