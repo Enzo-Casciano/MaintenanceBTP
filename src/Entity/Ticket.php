@@ -69,11 +69,6 @@ class Ticket
      */
     private $criticite;
 
-
-
-
-
-
     public function __construct()
     {
         $this->materiels = new ArrayCollection();
