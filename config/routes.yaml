@@ -39,7 +39,7 @@ ticket:
   controller: App\Controller\TicketController::index
 # ---------------------------------------------------
 utilisateur:
-  path: /login
+  path: /connexion
   controller: App\Controller\UtilisateurController::index
 # ---------------------------------------------------
 zone:

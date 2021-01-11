@@ -134,16 +134,16 @@ class StatutController extends AbstractController
                       ->find($id);
 
         $niveau = $this->getDoctrine()
-                      ->getRepository(Niveau::class)
-                      ->find($id);
+                       ->getRepository(Niveau::class)
+                       ->find($id);
 
         $zone = $this->getDoctrine()
                       ->getRepository(Zone::class)
                       ->find($id);
 
         $materiel = $this->getDoctrine()
-                      ->getRepository(Materiel::class)
-                      ->find($id);
+                         ->getRepository(Materiel::class)
+                         ->find($id);
 
         $intervention = $this->getDoctrine()
                              ->getRepository(Intervention::class)
