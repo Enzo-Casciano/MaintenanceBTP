@@ -27,6 +27,11 @@ class Intervention
      */
     private $descriptionRefus;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $dateFin;
+
 
     public function getId(): ?int
     {
@@ -54,6 +59,18 @@ class Intervention
     {
         $this->descriptionRefus = $descriptionRefus;
     
+        return $this;
+    }
+
+    public function getDateFin(): ?\DateTimeInterface
+    {
+        return $this->dateFin;
+    }
+
+    public function setDateFin(?\DateTimeInterface $dateFin): self
+    {
+        $this->dateFin = $dateFin;
+
         return $this;
     }
 }

@@ -28,11 +28,16 @@ class Utilisateur
      * @ORM\Column(type="string", length=50)
      */
     private $prenomUtilisateur;
-
+    
     /**
      * @ORM\Column(type="string", length=50)
      */
     private $mailUtilisateur;
+    
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $mdp;
 
     /**
      * @ORM\ManyToOne(targetEntity=Role::class, inversedBy="utilisateurs")
@@ -44,6 +49,7 @@ class Utilisateur
      * @ORM\OneToMany(targetEntity=Ticket::class, mappedBy="utilisateur")
      */
     private $tickets;
+
 
 
     public function __construct()
@@ -80,15 +86,27 @@ class Utilisateur
 
         return $this;
     }
-
+    
     public function getMailUtilisateur(): ?string
     {
         return $this->mailUtilisateur;
     }
-
+    
     public function setMailUtilisateur(string $mailUtilisateur): self
     {
         $this->mailUtilisateur = $mailUtilisateur;
+        
+        return $this;
+    }
+
+    public function getMdp(): ?string
+    {
+        return $this->mdp;
+    }
+
+    public function setMdp(string $mdp): self
+    {
+        $this->mdp = $mdp;
 
         return $this;
     }
@@ -134,6 +152,7 @@ class Utilisateur
 
         return $this;
     }
+
 
 
 
