@@ -13,16 +13,16 @@
                     <div id="login-box" class="col-md-12">
                     <form id="login-form" class="form" action="" method="post">
                             <div class="form-group">
-                                <label for="inputEmail" class="text-primary">Adresse Mail:</label><br>
+                                <label for="inputEmail" class="text-warning">Adresse Mail:</label><br>
                                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Mail" required autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="inputPassword" class="text-primary">Mot de passe:</label><br>
+                                <label for="inputPassword" class="text-warning">Mot de passe:</label><br>
                                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                             </div>
                             <div class="text-center form-group">
-                                <input class="btn btn-primary" type="submit" value="Se connecter">
+                                <input class="btn btn-warning" type="submit" value="Se connecter">
                             </div>
                         </form>
                     </div>
