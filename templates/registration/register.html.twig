@@ -6,25 +6,30 @@
 {% for flashError in app.flashes('verify_email_error') %}
     <div class="alert alert-danger" role="alert">{{ flashError }}</div>
 {% endfor %}
-    <div class="card mx-auto" style="width:400px">
+    <div class="card border-secondary mx-auto bg-light" style="width:400px">
+        <div class="card-header bg-secondary text-white text-center">
+            <h3>Inscription d'un utilisateur</h3>
+        </div>
     <div class="card-body" style="width:350px">
-    <b class="text-center">Inscription d'un utilisateur</b>
-    <br>
             {{ form_start(registrationForm) }}
-            <br>
-            {{ form_label(registrationForm.nomUtilisateur, "Nom :") }}
+            <div class="text-warning">
+                {{ form_label(registrationForm.nomUtilisateur, "Nom :") }}
                 {{ form_widget(registrationForm.nomUtilisateur) }}
+
                 {{ form_label(registrationForm.nomUtilisateur, "Prénom :") }}
                 {{ form_widget(registrationForm.prenomUtilisateur) }}
+
                 {{ form_row(registrationForm.email, {
                     label: 'Mail :'
                 }) }}
                 {{ form_row(registrationForm.plainPassword, {
                     label: 'Mot de passe :'
                 }) }}
-            </br>
-                <input class="btn btn-warning text-center" type="submit" value="Inscrire">
+            </div>
     </div>
+            <div class="mb-3 text-center">
+                <button class="btn btn-warning text-center" type="submit">Inscrire</button>
+            </div>
     </div>
     {{ form_end(registrationForm) }}
 {% endblock %}

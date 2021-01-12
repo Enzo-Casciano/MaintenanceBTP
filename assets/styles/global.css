@@ -70,6 +70,25 @@ body {
   border-left-color: #0026ff
 }
 
+.bd-callout-warning {
+  border-left-color: #ffc107
+}
+
 body{
   overflow-x: hidden;
+}
+
+.nav-button {
+  display: flex;
+  justify-content: space-around;
+  width: 20rem;
+}
+
+#addUser {
+  margin-right: 20%;
+}
+
+#logo {
+  display: flex;
+  margin-left: 42%;
 }

@@ -30,6 +30,8 @@ class TicketController extends AbstractController
         $ticket = new Ticket();
 
         $ticket->setDateTicket(new \DateTime('now'));
+        
+        $statut = $statutRep->find(1);
 
         $zone->addNiveau($niveau);
         $salle->addZone($zone);
@@ -47,10 +49,11 @@ class TicketController extends AbstractController
         $formZone->handleRequest($request);
         
         if($form->isSubmitted()){
+            $ticket->setStatut($statut);
             $em->persist($ticket);
             $em->flush();
 
-            // return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home');
         }
 
 

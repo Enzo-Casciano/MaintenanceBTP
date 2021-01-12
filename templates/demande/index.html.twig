@@ -61,14 +61,6 @@
                 'label': 'Description du problème rencontré :'
             }) }}
     </b>
-    <div class="popup" onclick="myFunction1()">
-        <span class="popuptext" id="myPopup1">
-            Votre demande d'assistance a bien été envoyé à l'administrateur.
-            <br>
-            Un technicien va prendre en charge votre demande dans les plus bref délais.
-            <br><br>
-            <a href="{{ path('home') }}"><button type="button" class="btn btn-success shadow" id="etape1"><i class="fa fa-check" aria-hidden="true"></i></button></a>
-        </span>
         {{ form_row(form.save, {
             'label': 'Confirmer'
         })}}
@@ -76,12 +68,4 @@
 </div>
 
 {{ form_end(form,{'render_rest': false}) }} 
-
-<script>
-function myFunction1() {
-    var popup = document.getElementById("myPopup1");
-        popup.classList.toggle("show");
-    }
-
-</script>
 {% endblock %}

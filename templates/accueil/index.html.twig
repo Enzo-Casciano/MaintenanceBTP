@@ -7,11 +7,11 @@
     <div class="row">
         <div class="col-lg">
             <a href="{{ path('resultat') }}">
-                <button type="button" class="btn btn-primary shadow">Voir demandes</button>
+                <button type="button" class="btn btn-outline-dark shadow">Voir demandes</button>
             </a>
         </div>
             <div class="dropdown shadow">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Choix niveau
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -21,11 +21,12 @@
             </div>
         <div class="col-lg">
         <a href="{{ path('ticket') }}">
-            <button type="button" class="btn btn-info float-right shadow">Faire demandes</button>
+            <button type="button" class="btn btn-outline-success float-right shadow">Faire demandes</button>
         </a>
         </div>
     </div>
     <br>
+    <hr>
     <div class="text-center">
         <img src="{{asset('doc/img/rez-de-chaussee.jpg')}}" id="imgRdc" style="width: 1200px; height: 800px;"/> 
         <img src="{{asset('doc/img/etage.jpg')}}" id="imgEta" style="width: 1200px; height: 800px;"/> 

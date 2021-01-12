@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\StatutRepository;
+use App\Repository\TicketRepository;
 
 class StatutController extends AbstractController
 {
@@ -28,7 +29,7 @@ class StatutController extends AbstractController
         ]);
     }
 
-    public function showTickets(StatutRepository $statutRep){
+    public function showTickets(TicketRepository $ticketRep){
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -50,7 +51,7 @@ class StatutController extends AbstractController
                       ->getRepository(Criticite::class)
                       ->findAll();
 
-        $listeTickets = $statutRep->getTicketsDetails('En attente');
+        $listeTickets = $ticketRep->getTicketsDetails('En attente');
 
         return $this->render('tableDemandes/index.html.twig',[
                         'criticite' => $criticite,
@@ -62,7 +63,7 @@ class StatutController extends AbstractController
             ]);
     }
 
-    public function showOneTicket($id, StatutRepository $statutRep){
+    public function showOneTicket($id, TicketRepository $ticketRep){
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -99,7 +100,7 @@ class StatutController extends AbstractController
         $form = $this->createForm(CriticiteType::class, $criticite);
 
 
-        $changementStatutAttente = $statutRep->updateStatutTicket($id, 2);
+        $changementStatutAttente = $ticketRep->updateStatutTicket($id, 2);
 
         return $this->render('vueDemande/index.html.twig',[
                         'form' => $form->createView(),
@@ -161,9 +162,9 @@ class StatutController extends AbstractController
             ]);
     }
 
-    public function showTicketsAdmin(StatutRepository $statutRep){
+    public function showTicketsAdmin(TicketRepository $ticketRep){
 
-        $listeTicketsAttente = $statutRep->getTicketsAttente('En attente');
+        $listeTicketsAttente = $ticketRep->getTicketsAttente('En attente');
 
         return $this->render('tableDemandesAdmin/index.html.twig',[
                         
