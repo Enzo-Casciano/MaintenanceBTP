@@ -5,11 +5,13 @@
 {% block body %}
     {{ form_start(form) }}
     <div class="row">
+    {% if app.user %}
         <div class="col-lg">
             <a href="{{ path('resultat') }}">
                 <button type="button" class="btn btn-outline-dark shadow">Voir demandes</button>
             </a>
         </div>
+    {% endif %}
             <div class="dropdown shadow">
                 <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Choix niveau
@@ -19,11 +21,13 @@
                     <a class="dropdown-item" href="#" id="eta">Étage</a>
                 </div>
             </div>
+    {% if app.user %}
         <div class="col-lg">
         <a href="{{ path('ticket') }}">
             <button type="button" class="btn btn-outline-success float-right shadow">Faire demandes</button>
         </a>
         </div>
+    {% endif %}
     </div>
     <br>
     <hr>

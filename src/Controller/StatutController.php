@@ -69,14 +69,6 @@ class StatutController extends AbstractController
                        ->getRepository(Ticket::class)
                        ->find($id);
 
-        $utilisateur = $this->getDoctrine()
-                            ->getRepository(Utilisateur::class)
-                            ->find($id);
-
-        $statut = $this->getDoctrine()
-                       ->getRepository(Statut::class)
-                       ->find($id);
-
         $salle = $this->getDoctrine()
                       ->getRepository(Salle::class)
                       ->find($id);
@@ -106,9 +98,7 @@ class StatutController extends AbstractController
                         'form' => $form->createView(),
                         'criticite' => $criticite,
                         'ticket' => $ticket,
-                        'utilisateur' => $utilisateur,
                         'salle' => $salle,
-                        'statut' => $statut,
                         'niveau' => $niveau,
                         'zone' => $zone,
                         'materiel' => $materiel,

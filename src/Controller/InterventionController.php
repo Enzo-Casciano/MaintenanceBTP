@@ -14,6 +14,7 @@ use App\Entity\Zone;
 use App\Form\InterventionType;
 use App\Repository\InterventionRepository;
 use App\Repository\StatutRepository;
+use App\Repository\TicketRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InterventionController extends AbstractController
 {
 
-    public function index(Request $request, EntityManagerInterface $em, $id, StatutRepository $statutRep, InterventionRepository $interventionRep): Response
+    public function index(Request $request, EntityManagerInterface $em, $id, TicketRepository $ticketRep, InterventionRepository $interventionRep): Response
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -45,14 +46,6 @@ class InterventionController extends AbstractController
                        ->getRepository(Ticket::class)
                        ->find($id);
 
-        $utilisateur = $this->getDoctrine()
-                            ->getRepository(Utilisateur::class)
-                            ->find($id);
-
-        $statut = $this->getDoctrine()
-                       ->getRepository(Statut::class)
-                       ->find($id);
-
         $salle = $this->getDoctrine()
                       ->getRepository(Salle::class)
                       ->find($id);
@@ -72,17 +65,15 @@ class InterventionController extends AbstractController
         $criticite = $this->getDoctrine()
                          ->getRepository(Criticite::class)
                          ->find($id);
-        $changementStatutEnCours = $statutRep->updateStatutTicket($id, 3);
+        $changementStatutEnCours = $ticketRep->updateStatutTicket($id, 3);
 
-        $updateInterventionTicket = $statutRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
+        $updateInterventionTicket = $ticketRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
 
     return $this->render('intervention/index.html.twig',[
          'form' => $form->createView(),
          'criticite' => $criticite,
          'ticket' => $ticket,
-         'utilisateur' => $utilisateur,
          'salle' => $salle,
-         'statut' => $statut,
          'niveau' => $niveau,
          'zone' => $zone,
          'materiel' => $materiel,

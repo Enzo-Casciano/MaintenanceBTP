@@ -27,7 +27,7 @@ validationdemande:
   controller: App\Controller\StatutController::showTicketsAdmin
 # ---------------------------------------------------
 vueDemande:
-  path: /admin/vueDemande/{id}
+  path: /vueDemande/{id}
   controller: App\Controller\StatutController::showOneTicket
 # ---------------------------------------------------
 vueResultat:

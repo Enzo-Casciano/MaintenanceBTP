@@ -22,7 +22,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">
-                <p><b>Demandeur : </b>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
+                <p><b>Demandeur : </b>{{ ticket.utilisateur.prenomUtilisateur }} {{ ticket.utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
                 {% if ticket.statut.id != 1 %}
                 <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p> {# Modifier par l'entity Criticité #}
