@@ -25,11 +25,13 @@
   <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
   <td>{{ ticket.statut.nomStatut }}</td>
   <td>{{ ticket.criticite.nomCriticite }}</td>
+  {% if is_granted('ROLE_ADMIN') %}
   <td>
     <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
       <button type="button" class="btn btn-primary">Voir détails</button>
     </a>
   </td>
+  {% endif %}
 </tr>
 {% endfor %}
 </tbody>

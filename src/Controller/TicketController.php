@@ -6,6 +6,7 @@ use App\Entity\Materiel;
 use App\Entity\Niveau;
 use App\Entity\Salle;
 use App\Entity\Ticket;
+use App\Entity\Utilisateur;
 use App\Entity\Zone;
 use App\Form\SalleType;
 use App\Form\TicketType;
@@ -27,6 +28,8 @@ class TicketController extends AbstractController
         $salle = new Salle();
         $materiel = new Materiel();
         $ticket = new Ticket();
+        $utilisateur = new Utilisateur();
+        $utilisateur = $this->getUser();
 
         $ticket->setDateTicket(new \DateTime('now'));
 
@@ -34,6 +37,7 @@ class TicketController extends AbstractController
         $salle->addZone($zone);
         $ticket->addSalle($salle);
         $ticket->addMateriel($materiel);
+        $ticket->setUtilisateur($utilisateur);
 
         $form = $this->createForm(TicketType::class, $ticket);
         $formSalle = $this->createForm(SalleType::class, $salle);
