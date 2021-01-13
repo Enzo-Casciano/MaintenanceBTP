@@ -20,6 +20,16 @@ class StatutRepository extends ServiceEntityRepository
         parent::__construct($registry, Statut::class);
     }
 
+    public function getStatut($idStatut)
+    {
+        $qb = $this->createQueryBuilder('s')
+                   ->select('s.id')
+                   ->where('s.id = ?1')
+                   ->setParameter(1, $idStatut);
+        return $qb->getQuery()
+                  ->getResult();
+    }
+
 
     // /**
     //  * @return Statut[] Returns an array of Statut objects

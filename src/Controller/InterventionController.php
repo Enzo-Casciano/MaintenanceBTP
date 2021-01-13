@@ -37,10 +37,10 @@ class InterventionController extends AbstractController
         if($form->isSubmitted()){
             $em->persist($intervention);
             $em->flush();
+            $updateInterventionTicket = $ticketRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
 
             return $this->redirectToRoute('resultat');
         }
-
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -65,9 +65,10 @@ class InterventionController extends AbstractController
         $criticite = $this->getDoctrine()
                          ->getRepository(Criticite::class)
                          ->find($id);
+
         $changementStatutEnCours = $ticketRep->updateStatutTicket($id, 3);
 
-        $updateInterventionTicket = $ticketRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
+
 
     return $this->render('intervention/index.html.twig',[
          'form' => $form->createView(),
@@ -77,8 +78,7 @@ class InterventionController extends AbstractController
          'niveau' => $niveau,
          'zone' => $zone,
          'materiel' => $materiel,
-         'changementStatutEnCours' => $changementStatutEnCours,
-         'updateInterventionTicket' => $updateInterventionTicket
+         'changementStatutEnCours' => $changementStatutEnCours
     ]);
 }
 
