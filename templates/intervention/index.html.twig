@@ -52,10 +52,8 @@
         'label' : 'Description de l\'intervention :'
     }) }}
 </div>
-<div class="text-center" id="confirm1">
-    {{ form_row(form.save, {
-        'label': 'Confirmer'
-    })}}
+<div class="text-center">
+    <button type="button" class="btn btn-warning shadow" id="confirm1">Confirmer</button>
 </div>
 <script>
 $(document).ready(function () {
@@ -75,16 +73,14 @@ $(document).ready(function () {
         'label' : 'Description du refus de cette demande :'
     }) }}
 </div>
-<div class="text-center" id="confirm2">
-    {{ form_row(form.save, {
-        'label': 'Envoyer'
-    })}}
+<div class="text-center">
+    <button type="button" class="btn btn-warning shadow" id="confirm2">Confirmer</button>
 </div>
 <script>
 $(document).ready(function () {
     $("#confirm2").click(function(){
-        $changementStatutEnCours
-        $updateInterventionTicket
+        // $changementStatutEnCours
+        // $updateInterventionTicket
     });
 });
 </script>
