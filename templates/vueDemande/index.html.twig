@@ -51,66 +51,67 @@
         </div>
         <hr class="shadow">
     </div>
-{% if ticket.statut.id == 1 %}    
-    <div class="card-footer text-center">
-        <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Criticité
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Faible</button>
-                <button class="dropdown-item" type="button">Modéré</button>
-                <button class="dropdown-item" type="button">Critique</button>
+{% if is_granted('ROLE_ADMIN') %}
+    {% if ticket.statut.id == 1 %}    
+        <div class="card-footer text-center">
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Criticité
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button">Faible</button>
+                    <button class="dropdown-item" type="button">Modéré</button>
+                    <button class="dropdown-item" type="button">Critique</button>
+                </div>
             </div>
-        </div>
-    </div> 
-{% endif %}
-</div>
+        </div> 
+    {% endif %}
+    </div>
 
-<div class="card mx-auto shadow" style="width: 1000px;" id="finish">
-{% if ticket.statut.id == 3 %} 
-    {% if ticket.intervention.descriptionIntervention != null %}
-        <div class="card-body">
-            <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionIntervention }}</p>
-        </div>
+    <div class="card mx-auto shadow" style="width: 1000px;" id="finish">
+    {% if ticket.statut.id == 3 %} 
+        {% if ticket.intervention.descriptionIntervention != null %}
+            <div class="card-body">
+                <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionIntervention }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+    </div>
+
+    <div class="card mx-auto shadow" style="width: 1000px;" id="refuser">
+    {% if ticket.statut.id == 4 %} 
+        {% if ticket.intervention.descriptionRefus != null %}
+            <div class="card-body">
+                <p><b>Description du Refus :</b><br>{{ ticket.intervention.descriptionRefus }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+    </div>
+
+    <br>
+    <div class="text-center">
+    {% if ticket.statut.id == 2 %}
+        <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
+            <button type="button" class="btn btn-warning shadow" id="btn2">Résolue</button>
+        </a>
+    {% endif %}
+    {% if ticket.statut.id == 1 %}
+        {# {{ form_start(form) }} #}
+            {# {{ form_widget(ticket.criticite) }} #}
+        <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
+            <button type="button" class="btn btn-danger shadow" id="refus">Refuser</button>
+        </a>
+        <a href="{{ path('validationdemande') }}">
+            <button type="button" class="btn btn-success shadow" id="valid">Valider</button>
+            <script> 
+                $("valid").click(function(){
+                    $updateInterventionTicket 
+                })
+            </script>
+        </a>
+        {# {{ form_end(form, {'render_rest': false}) }} #}
     {% endif %}
 {% endif %}
-</div>
-
-<div class="card mx-auto shadow" style="width: 1000px;" id="refuser">
-{% if ticket.statut.id == 4 %} 
-    {% if ticket.intervention.descriptionRefus != null %}
-        <div class="card-body">
-            <p><b>Description de l'intervention :</b><br>{{ ticket.intervention.descriptionRefus }}</p>
-        </div>
-    {% endif %}
-{% endif %}
-</div>
-
-<br>
-<div class="text-center">
-{% if ticket.statut.id == 2 %}
-    <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
-        <button type="button" class="btn btn-warning shadow" id="btn2">Résolue</button>
-    </a>
-{% endif %}
-{% if ticket.statut.id == 1 %}
-    {# {{ form_start(form) }} #}
-        {# {{ form_widget(ticket.criticite) }} #}
-    <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
-        <button type="button" class="btn btn-danger shadow" id="refus">Refuser</button>
-    </a>
-    <a href="{{ path('validationdemande') }}">
-        <button type="button" class="btn btn-success shadow" id="valid">Valider</button>
-        <script> 
-            $("valid").click(function(){
-                $updateInterventionTicket 
-            })
-        </script>
-    </a>
-    {# {{ form_end(form, {'render_rest': false}) }} #}
-{% endif %}
-    
 </div>
 <br>
 <data value="{{ ticket.statut.nomStatut }}" id="resolu"></data>
