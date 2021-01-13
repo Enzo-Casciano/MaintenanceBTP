@@ -63,7 +63,7 @@ class StatutController extends AbstractController
             ]);
     }
 
-    public function showOneTicket($id, TicketRepository $ticketRep){
+    public function showOneTicket($id, TicketRepository $ticketRep, StatutRepository $statutRep){
 
         $ticket = $this->getDoctrine()
                        ->getRepository(Ticket::class)
@@ -91,8 +91,9 @@ class StatutController extends AbstractController
 
         $form = $this->createForm(CriticiteType::class, $criticite);
 
-
-        $changementStatutAttente = $ticketRep->updateStatutTicket($id, 2);
+    if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3)) {
+        $ticketRep->updateStatutTicket($id, 2);
+    }
 
         return $this->render('vueDemande/index.html.twig',[
                         'form' => $form->createView(),
@@ -101,8 +102,7 @@ class StatutController extends AbstractController
                         'salle' => $salle,
                         'niveau' => $niveau,
                         'zone' => $zone,
-                        'materiel' => $materiel,
-                        'changementStatutAttente' => $changementStatutAttente,
+                        'materiel' => $materiel
             ]);
     }
 

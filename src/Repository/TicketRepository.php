@@ -71,6 +71,18 @@ class TicketRepository extends ServiceEntityRepository
         return $qb->getQuery()
                   ->getResult();
     }
+
+    public function getStatutTicket($idTicket)
+    {
+        $qb = $this->createQueryBuilder('t')
+                   ->join('t.statut', 's')
+                   ->addSelect('s')
+                   ->select('s.id')
+                   ->where('t.id = ?1')
+                   ->setParameter(1, $idTicket);
+        return $qb->getQuery()
+                  ->getResult();
+    }
     // /**
     //  * @return Ticket[] Returns an array of Ticket objects
     //  */
