@@ -17,7 +17,9 @@
             <div class="col-sm-6">
                 <p><b>Demandeur : </b>{{ ticket.utilisateur.prenomUtilisateur }} {{ ticket.utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
-                <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p>
+                {% if ticket.statut.id == 1 %}
+                    <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p>
+                {% endif %}
             </div>
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
@@ -52,17 +54,11 @@
         'label' : 'Description de l\'intervention :'
     }) }}
 </div>
-<div class="text-center">
-    <button type="button" class="btn btn-warning shadow" id="confirm1">Confirmer</button>
+<div class="text-center" id="confirm1">
+    {{ form_row(form.save, {
+        'label': 'Confirmer'
+    })}}
 </div>
-<script>
-$(document).ready(function () {
-    $("#confirm1").click(function(){
-        $changementStatutEnCours
-        $updateInterventionTicket
-    });
-});
-</script>
 {% endif %}
 </b>
 
@@ -73,17 +69,11 @@ $(document).ready(function () {
         'label' : 'Description du refus de cette demande :'
     }) }}
 </div>
-<div class="text-center">
-    <button type="button" class="btn btn-warning shadow" id="confirm2">Confirmer</button>
+<div class="text-center" id="confirm2">
+    {{ form_row(form.save, {
+        'label': 'Envoyer'
+    })}}
 </div>
-<script>
-$(document).ready(function () {
-    $("#confirm2").click(function(){
-        // $changementStatutEnCours
-        // $updateInterventionTicket
-    });
-});
-</script>
 {% endif %}
 </b>
 {{ form_end(form,{'render_rest': false}) }}

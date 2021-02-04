@@ -12,6 +12,7 @@ use App\Entity\Ticket;
 use App\Entity\Utilisateur;
 use App\Entity\Zone;
 use App\Form\CriticiteType;
+use App\Form\StatutType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -91,9 +92,13 @@ class StatutController extends AbstractController
 
         $form = $this->createForm(CriticiteType::class, $criticite);
 
-    if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3)) {
-        $ticketRep->updateStatutTicket($id, 2);
-    }
+        if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3) && $ticketRep->getStatutTicket($id) != $statutRep->getStatut(1)) {
+            $ticketRep->updateStatutTicket($id, 2);
+        }
+
+        if($ticketRep->getStatutTicket($id) === $statutRep->getStatut(4)) {
+            $ticketRep->updateCriticiteTicket($id, 4);
+        }
 
         return $this->render('vueDemande/index.html.twig',[
                         'form' => $form->createView(),

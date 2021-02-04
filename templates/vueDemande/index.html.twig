@@ -99,36 +99,15 @@
         {# {{ form_start(form) }} #}
             {# {{ form_widget(ticket.criticite) }} #}
         <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
-            <button type="button" class="btn btn-danger shadow" id="refus">Refuser</button>
+            <button type="button" class="btn btn-danger shadow">Refuser</button>
         </a>
         <a href="{{ path('validationdemande') }}">
-            <button type="button" class="btn btn-success shadow" id="valid">Valider</button>
-            <script> 
-                $("valid").click(function(){
-                    $updateInterventionTicket 
-                })
-            </script>
+            <button type="button" class="btn btn-success shadow">Valider</button>
         </a>
         {# {{ form_end(form, {'render_rest': false}) }} #}
     {% endif %}
 {% endif %}
 </div>
 <br>
-<data value="{{ ticket.statut.nomStatut }}" id="resolu"></data>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-  var $statut = document.getElementById("resolu").value;
-$("#finish").hide();
-
-$(document).ready(function () {
-  if($statut == "Résolue"){
-      $("#finish").show();
-      $("#btn2").hide();
-  }
-// Faire la recuperation du statut de la demande
-// Faire une condition pour cacher le bouton si le statut = Résolue
-
-  });
-</script>
 
 {% endblock %}
