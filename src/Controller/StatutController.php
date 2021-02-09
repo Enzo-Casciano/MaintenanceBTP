@@ -2,17 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Criticite;
-use App\Entity\Intervention;
-use App\Entity\Materiel;
-use App\Entity\Niveau;
-use App\Entity\Salle;
-use App\Entity\Statut;
-use App\Entity\Ticket;
-use App\Entity\Utilisateur;
-use App\Entity\Zone;
-use App\Form\CriticiteType;
-use App\Form\StatutType;
+use App\Form\TicketCriticiteType;
+use App\Form\TicketType;
+use App\Repository\CriticiteRepository;
+use App\Repository\InterventionRepository;
+use App\Repository\MaterielRepository;
+use App\Repository\NiveauRepository;
+use App\Repository\SalleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\StatutRepository;
 use App\Repository\TicketRepository;
+use App\Repository\UtilisateurRepository;
+use App\Repository\ZoneRepository;
 
 class StatutController extends AbstractController
 {
@@ -30,67 +28,41 @@ class StatutController extends AbstractController
         ]);
     }
 
-    public function showTickets(TicketRepository $ticketRep){
+    public function showTickets(TicketRepository $ticketRep, SalleRepository $salleRep, StatutRepository $statutRep, UtilisateurRepository $utilisateurRep){
 
-        $ticket = $this->getDoctrine()
-                       ->getRepository(Ticket::class)
-                       ->findAll();
+        $ticket = $ticketRep->findAll();
 
-        $salle = $this->getDoctrine()
-                      ->getRepository(Salle::class)
-                      ->findAll();
+        $salle = $salleRep->findAll();
         
-        $statut = $this->getDoctrine()
-                      ->getRepository(Statut::class)
-                      ->findAll();
+        $statut = $statutRep->findAll();
 
-        $user = $this->getDoctrine()
-                      ->getRepository(Utilisateur::class)
-                      ->findAll();
-        
-        $criticite = $this->getDoctrine()
-                      ->getRepository(Criticite::class)
-                      ->findAll();
+        $user = $utilisateurRep->findAll();
 
         $listeTickets = $ticketRep->getTicketsDetails('En attente');
-
+        
         return $this->render('tableDemandes/index.html.twig',[
-                        'criticite' => $criticite,
-                        'ticket' => $ticket,
-                        'salle' => $salle,
-                        'statut' => $statut,
-                        'utilisateur' => $user,
-                        'listeTicket' => $listeTickets
+            'ticket' => $ticket,
+            'salle' => $salle,
+            'statut' => $statut,
+            'utilisateur' => $user,
+            'listeTicket' => $listeTickets
             ]);
-    }
+        }
+        
+        public function showOneTicket(Request $request, $id, TicketRepository $ticketRep, SalleRepository $salleRep, StatutRepository $statutRep, NiveauRepository $niveauRep, ZoneRepository $zoneRep, MaterielRepository $materielRep){
+            
+            $em = $this->getDoctrine()->getManager();
+        $ticket = $ticketRep->find($id);
 
-    public function showOneTicket($id, TicketRepository $ticketRep, StatutRepository $statutRep){
+        $salle = $salleRep->find($id);
 
-        $ticket = $this->getDoctrine()
-                       ->getRepository(Ticket::class)
-                       ->find($id);
+        $niveau = $niveauRep->find($id);
 
-        $salle = $this->getDoctrine()
-                      ->getRepository(Salle::class)
-                      ->find($id);
+        $zone = $zoneRep->find($id);
 
-        $niveau = $this->getDoctrine()
-                      ->getRepository(Niveau::class)
-                      ->find($id);
+        $materiel = $materielRep->find($id);
 
-        $zone = $this->getDoctrine()
-                      ->getRepository(Zone::class)
-                      ->find($id);
-
-        $materiel = $this->getDoctrine()
-                      ->getRepository(Materiel::class)
-                      ->find($id);
-
-        $criticite = $this->getDoctrine()
-                          ->getRepository(Criticite::class)
-                          ->find($id);
-
-        $form = $this->createForm(CriticiteType::class, $criticite);
+        $form = $this->createForm(TicketCriticiteType::class, $ticket);
 
         if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3) && $ticketRep->getStatutTicket($id) != $statutRep->getStatut(1)) {
             $ticketRep->updateStatutTicket($id, 2);
@@ -100,9 +72,16 @@ class StatutController extends AbstractController
             $ticketRep->updateCriticiteTicket($id, 4);
         }
 
+        if($form->isSubmitted()){
+
+            $em->persist($ticket);
+            $em->flush();
+
+            return $this->redirectToRoute('validationdemande');
+        }
+
         return $this->render('vueDemande/index.html.twig',[
                         'form' => $form->createView(),
-                        'criticite' => $criticite,
                         'ticket' => $ticket,
                         'salle' => $salle,
                         'niveau' => $niveau,
@@ -111,39 +90,23 @@ class StatutController extends AbstractController
             ]);
     }
 
-    public function showResultTicket($id){
+    public function showResultTicket($id, TicketRepository $ticketRep, SalleRepository $salleRep, UtilisateurRepository $utilisateurRep, StatutRepository $statutRep, NiveauRepository $niveauRep, ZoneRepository $zoneRep, MaterielRepository $materielRep, InterventionRepository $interventionRep){
 
-        $ticket = $this->getDoctrine()
-                       ->getRepository(Ticket::class)
-                       ->find($id);
+        $ticket = $ticketRep->find($id);
 
-        $utilisateur = $this->getDoctrine()
-                            ->getRepository(Utilisateur::class)
-                            ->find($id);
+        $utilisateur = $utilisateurRep->find($id);
 
-        $statut = $this->getDoctrine()
-                       ->getRepository(Statut::class)
-                       ->find($id);
+        $statut = $statutRep->find($id);
 
-        $salle = $this->getDoctrine()
-                      ->getRepository(Salle::class)
-                      ->find($id);
+        $salle = $salleRep->find($id);
 
-        $niveau = $this->getDoctrine()
-                       ->getRepository(Niveau::class)
-                       ->find($id);
+        $niveau = $niveauRep->find($id);
 
-        $zone = $this->getDoctrine()
-                      ->getRepository(Zone::class)
-                      ->find($id);
+        $zone = $zoneRep->find($id);
 
-        $materiel = $this->getDoctrine()
-                         ->getRepository(Materiel::class)
-                         ->find($id);
+        $materiel = $materielRep->find($id);
 
-        $intervention = $this->getDoctrine()
-                             ->getRepository(Intervention::class)
-                             ->find($id);
+        $intervention = $interventionRep->find($id);
 
         return $this->render('vueResultat/index.html.twig',[
                         'ticket' => $ticket,

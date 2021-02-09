@@ -65,9 +65,9 @@ class Ticket
     private $salles;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Criticite::class, inversedBy="tickets")
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $criticite;
+    private $nomCriticite;
 
     public function __construct()
     {
@@ -207,18 +207,6 @@ class Ticket
         return $this;
     }
     
-    public function getCriticite(): ?Criticite
-    {
-        return $this->criticite;
-    }
-    
-    public function setCriticite(?Criticite $criticite): self
-    {
-        $this->criticite = $criticite;
-        
-        return $this;
-    }
-    
     public function getUtilisateur(): ?Utilisateur
     {
         return $this->utilisateur;
@@ -227,6 +215,18 @@ class Ticket
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    public function getNomCriticite(): ?string
+    {
+        return $this->nomCriticite;
+    }
+
+    public function setNomCriticite(?string $nomCriticite): self
+    {
+        $this->nomCriticite = $nomCriticite;
 
         return $this;
     }

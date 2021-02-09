@@ -53,6 +53,7 @@ class TicketController extends AbstractController
         $formZone->handleRequest($request);
         
         if($form->isSubmitted()){
+            // $ticket->getCriticite()->setNomCriticite("En attente");
             $ticket->setStatut($statut);
             $em->persist($ticket);
             $em->flush();

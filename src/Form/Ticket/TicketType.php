@@ -70,22 +70,9 @@ class TicketType extends AbstractType
                 'delete_empty' => true            
                 ])
 
-            ->add('criticite', ChoiceType::class, [
-                    'choices'  => [
-                        'Faible' => 1,
-                        'Modéré' => 2,
-                        'Critique' => 3,
-                    ],
-                ])
-
-            // ->add('criticite', EntityType::class, [
-            //         'class'       => Criticite::class,
-            //         'choice_label' => 'nomCriticite',
-            //       ])
-
             ->add('save', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-success shadow mb-3'
+                    'class' => 'save btn btn-success'
                 ]
             ])
         ;
