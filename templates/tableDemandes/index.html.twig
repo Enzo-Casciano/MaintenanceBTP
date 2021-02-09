@@ -45,7 +45,11 @@
 </table>
 <script>
 $(document).ready( function () {
-    $('#mytable').DataTable();
+    $('#mytable').DataTable({
+            'order' : [[1, 'desc']],
+            'deferRender': true,
+            'pageLength': 25,
+        });
 } );
 </script>
 {% endblock %}
