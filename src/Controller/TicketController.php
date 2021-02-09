@@ -24,6 +24,7 @@ class TicketController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
+        // $statut = $statutRep->findAll();
         $niveau = new Niveau();
         $zone = new Zone();
         $salle = new Salle();
@@ -51,7 +52,7 @@ class TicketController extends AbstractController
         $form->handleRequest($request);
         $formSalle->handleRequest($request);
         $formZone->handleRequest($request);
-        
+
         if($form->isSubmitted()){
             // $ticket->getCriticite()->setNomCriticite("En attente");
             $ticket->setStatut($statut);

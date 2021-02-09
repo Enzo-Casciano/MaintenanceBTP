@@ -72,6 +72,7 @@ class StatutController extends AbstractController
             $ticketRep->updateCriticiteTicket($id, 4);
         }
 
+        $form->handleRequest($request);
         if($form->isSubmitted()){
 
             $em->persist($ticket);
