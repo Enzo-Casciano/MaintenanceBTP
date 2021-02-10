@@ -3,33 +3,49 @@
 {% block title %}Liste demandes assistances à valider{% endblock %}
 
 {% block body %}
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+</head>
   {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('home') }}">
       <i class="fas fa-arrow-circle-left fa-2x"></i>
     </a><br><br>
-    <table class="table">
+    <table class="display" id="mytable">
       <thead class="thead-light">
         <tr>
-          <th scope="col" data-sortable="true">Titre</th>
-          <th scope="col" data-sortable="true">Date demande</th>
-          <th scope="col" data-sortable="true">Demandeur</th>
-          <th scope="col" data-sortable="true">Détails</th>
+          <th>Titre</th>
+          <th>Date demande</th>
+          <th>Demandeur</th>
+          <th>Détails</th>
         </tr>
       </thead>
       <tbody>
     {% for ticket in listeTicketsAttente %}
     <tr>
-    <td>{{ ticket.titreTicket }}</td>
-    <td>{{ ticket.dateTicket|date('d-m-Y') }}</td>
-    <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
-    <td>
-      <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
-        <button type="button" class="btn btn-primary">Voir détails</button>
-      </a>
-    </td>
+      <td>{{ ticket.titreTicket }}</td>
+      <td>{{ ticket.dateTicket|date('d-m-Y') }}</td>
+      <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
+      <td>
+        <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
+          <button type="button" class="btn btn-primary">Voir détails</button>
+        </a>
+      </td>
     </tr>
     {% endfor %}
     </tbody>
     </table>
   {% endif %}
+<script>
+$(document).ready( function () {
+    $('#mytable').DataTable({
+            'order' : [[1, 'desc']],
+            'deferRender': true,
+            'pageLength': 25,
+        });
+} );
+</script>
 {% endblock %}

@@ -17,7 +17,9 @@
             <div class="col-sm-6">
                 <p><b>Demandeur : </b>{{ ticket.utilisateur.prenomUtilisateur }} {{ ticket.utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
-                <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p>
+                {% if ticket.statut.id == 1 %}
+                    <p><b>Criticité : </b>{{ ticket.nomCriticite }}</p>
+                {% endif %}
             </div>
             <div class="col-sm-6">
                 <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
@@ -57,14 +59,6 @@
         'label': 'Confirmer'
     })}}
 </div>
-<script>
-$(document).ready(function () {
-    $("#confirm1").click(function(){
-        $changementStatutEnCours
-        $updateInterventionTicket
-    });
-});
-</script>
 {% endif %}
 </b>
 
@@ -80,14 +74,6 @@ $(document).ready(function () {
         'label': 'Envoyer'
     })}}
 </div>
-<script>
-$(document).ready(function () {
-    $("#confirm2").click(function(){
-        $changementStatutEnCours
-        $updateInterventionTicket
-    });
-});
-</script>
 {% endif %}
 </b>
 {{ form_end(form,{'render_rest': false}) }}

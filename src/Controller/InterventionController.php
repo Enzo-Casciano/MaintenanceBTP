@@ -37,7 +37,7 @@ class InterventionController extends AbstractController
         if($form->isSubmitted()){
             $em->persist($intervention);
             $em->flush();
-            $updateInterventionTicket = $ticketRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
+            $ticketRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
 
             return $this->redirectToRoute('resultat');
         }

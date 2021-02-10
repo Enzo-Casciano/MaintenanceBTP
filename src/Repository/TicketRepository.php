@@ -24,16 +24,12 @@ class TicketRepository extends ServiceEntityRepository
     public function getTicketsDetails($nomStatut)
     {
         $qb = $this->createQueryBuilder('t')
-                    ->join('t.utilisateur', 'u')
-                    ->addSelect('u')
-                    ->join('t.statut', 's')
-                    ->addSelect('s')
-                    ->join('t.criticite', 'c')
-                    ->addSelect('c')
-                    ->leftJoin('t.salles', 'sa')
-                    ->addSelect('sa')
-                    ->where('s.nomStatut != ?1')
-                    ->setParameter(1, $nomStatut);
+                   ->join('t.utilisateur', 'u')
+                   ->addSelect('u')
+                   ->join('t.statut', 's')
+                   ->addSelect('s')
+                   ->where('s.nomStatut != ?1')
+                   ->setParameter(1, $nomStatut);
         return $qb->getQuery()
                   ->getResult();
     }
@@ -49,6 +45,18 @@ class TicketRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+
+    // public function updateCriticiteTicket($idTicket, $idCriticite)
+    // {
+    //     return $this->createQueryBuilder('t')
+    //     ->update()
+    //     ->set('t.criticite', '?1')
+    //     ->where('t.id = ?2')
+    //     ->setParameter(1, $idCriticite)
+    //     ->setParameter(2, $idTicket)
+    //     ->getQuery()
+    //     ->getResult();
+    // }
 
     public function updateInterventionTicket($idTicket, $idIntervention)
     {

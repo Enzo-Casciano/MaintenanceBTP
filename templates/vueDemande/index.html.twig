@@ -3,6 +3,7 @@
 {% block title %}Observation de la demande{% endblock %}
 
 {% block body %}
+{{ form_start(form) }}
 {% if ticket.statut.id == 1 %}
    <a href="{{ path('validationdemande') }}">
         <i class="fas fa-arrow-circle-left fa-2x"></i>
@@ -25,7 +26,7 @@
                 <p><b>Demandeur : </b>{{ ticket.utilisateur.prenomUtilisateur }} {{ ticket.utilisateur.nomUtilisateur }}</p>
                 <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
                 {% if ticket.statut.id != 1 %}
-                <p><b>Criticité : </b>{{ ticket.criticite.nomCriticite }}</p> {# Modifier par l'entity Criticité #}
+                    <p><b>Criticité : </b>{{ ticket.nomCriticite }}</p>
                 {% endif %}
             </div>
             <div class="col-sm-6">
@@ -54,16 +55,8 @@
 {% if is_granted('ROLE_ADMIN') %}
     {% if ticket.statut.id == 1 %}    
         <div class="card-footer text-center">
-            <div class="dropdown">
-                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Criticité
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <button class="dropdown-item" type="button">Faible</button>
-                    <button class="dropdown-item" type="button">Modéré</button>
-                    <button class="dropdown-item" type="button">Critique</button>
-                </div>
-            </div>
+                <b>{{ form_label(form.nomCriticite,"Choix de la criticité pour ce ticket :") }}</b>
+                {{ form_widget(form.nomCriticite) }}
         </div> 
     {% endif %}
     </div>
@@ -96,45 +89,14 @@
         </a>
     {% endif %}
     {% if ticket.statut.id == 1 %}
-        {# {{ form_start(form) }} #}
-            {# {{ form_widget(ticket.criticite) }} #}
         <a href="{{ path('intervention',{ 'id': ticket.id }) }}">
-            <button type="button" class="btn btn-danger shadow" id="refus">Refuser</button>
+            <button type="button" class="btn btn-danger shadow">Refuser</button>
         </a>
-        <a href="{{ path('validationdemande') }}">
-            <button type="button" class="btn btn-success shadow" id="valid">Valider</button>
-            <script> 
-                $("valid").click(function(){
-                    $updateInterventionTicket 
-                })
-            </script>
-        </a>
-        {# {{ form_end(form, {'render_rest': false}) }} #}
+        {{ form_widget(form.submit, {'label': "Valider"}) }}
     {% endif %}
 {% endif %}
 </div>
 <br>
-<data value="{{ ticket.statut.nomStatut }}" id="resolu"></data>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-  var $statut = document.getElementById("resolu").value;
-$("#finish").hide();
-
-$(document).ready(function () {
-  if($statut == "Résolue"){
-      $("#finish").show();
-      $("#btn2").hide();
-  }
-// Faire la recuperation du statut de la demande
-// Faire une condition pour cacher le bouton si le statut = Résolue
-
-  });
-</script>
-<script>
-function myFunction1() {
-    var popup = document.getElementById("myPopup");
-        popup.classList.toggle("show");
-    }
-</script>
-
+{{ form_errors(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 {% endblock %}
