@@ -64,7 +64,7 @@ class StatutController extends AbstractController
 
         $form = $this->createForm(TicketCriticiteType::class, $ticket);
 
-        if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3) && $ticketRep->getStatutTicket($id) != $statutRep->getStatut(1)) {
+        if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3)) {
             $ticketRep->updateStatutTicket($id, 2);
         }
 

@@ -31,7 +31,7 @@
   <td>{{ ticket.dateTicket|date('d-m-Y') }}</td>
   <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
   <td>{{ ticket.statut.nomStatut }}</td>
-  <td>{{ ticket.criticite.nomCriticite }}</td>
+  <td>{{ ticket.nomCriticite }}</td>
   {# {% if is_granted('ROLE_ADMIN') %} #}
   <td>
     <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
