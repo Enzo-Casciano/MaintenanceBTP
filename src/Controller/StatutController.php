@@ -48,10 +48,12 @@ class StatutController extends AbstractController
                       ->findAll();
         
         $criticite = $this->getDoctrine()
-                      ->getRepository(Criticite::class)
-                      ->findAll();
+                          ->getRepository(Criticite::class)
+                          ->findAll();
 
         $listeTickets = $ticketRep->getTicketsDetails('En attente');
+
+        $listeSalles = $ticketRep->getSalleTicket();
 
         return $this->render('tableDemandes/index.html.twig',[
                         'criticite' => $criticite,
@@ -59,7 +61,8 @@ class StatutController extends AbstractController
                         'salle' => $salle,
                         'statut' => $statut,
                         'utilisateur' => $user,
-                        'listeTicket' => $listeTickets
+                        'listeTicket' => $listeTickets,
+                        'listeSalle' => $listeSalles
             ]);
     }
 
