@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Ticket;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Ticket|null find($id, $lockMode = null, $lockVersion = null)
@@ -92,6 +93,15 @@ class TicketRepository extends ServiceEntityRepository
                    ->setParameter(1, $idTicket);
         return $qb->getQuery()
                   ->getResult();
+    }
+
+    public function getSalleTicket()
+    {
+        return $this->createQueryBuilder('t')
+        ->leftJoin('t.salles', 's')
+        ->addSelect('s')
+        ->getQuery()
+        ->getResult();  
     }
     // /**
     //  * @return Ticket[] Returns an array of Ticket objects
