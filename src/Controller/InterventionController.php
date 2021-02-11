@@ -61,9 +61,8 @@ class InterventionController extends AbstractController
         $materiel = $this->getDoctrine()
                          ->getRepository(Materiel::class)
                          ->find($id);
+                         
         $changementStatutEnCours = $ticketRep->updateStatutTicket($id, 3);
-
-
 
     return $this->render('intervention/index.html.twig',[
          'form' => $form->createView(),
