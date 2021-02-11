@@ -28,17 +28,15 @@
 {% for ticket in listeTicket %}
 <tr>
   <td>{{ ticket.titreTicket }}</td>
-  <td>{{ ticket.dateTicket|date('d-m-Y') }}</td>
+  <td>{{ ticket.dateTicket|date('Y-m-d') }}</td>
   <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
   <td>{{ ticket.statut.nomStatut }}</td>
-  <td>{{ ticket.criticite.nomCriticite }}</td>
-  {# {% if is_granted('ROLE_ADMIN') %} #}
+  <td>{{ ticket.nomCriticite }}</td>
   <td>
     <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
       <button type="button" class="btn btn-primary">Voir détails</button>
     </a>
   </td>
-  {# {% endif %} #}
 </tr>
 {% endfor %}
 </tbody>
@@ -48,7 +46,7 @@ $(document).ready( function () {
     $('#mytable').DataTable({
             'order' : [[1, 'desc']],
             'deferRender': true,
-            'pageLength': 25,
+            'pageLength': 10,
         });
 } );
 </script>

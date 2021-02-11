@@ -51,7 +51,7 @@ class StatutController extends AbstractController
         
         public function showOneTicket(Request $request, $id, TicketRepository $ticketRep, SalleRepository $salleRep, StatutRepository $statutRep, NiveauRepository $niveauRep, ZoneRepository $zoneRep, MaterielRepository $materielRep){
             
-            $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
         $ticket = $ticketRep->find($id);
 
         $salle = $salleRep->find($id);
