@@ -53,6 +53,7 @@ class StatutController extends AbstractController
             
         $em = $this->getDoctrine()->getManager();
         $ticket = $ticketRep->find($id);
+        // $materiel = $ticket->getMateriels();
 
         $salle = $salleRep->find($id);
 

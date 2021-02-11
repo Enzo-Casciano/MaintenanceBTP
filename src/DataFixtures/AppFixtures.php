@@ -64,72 +64,28 @@ class AppFixtures extends Fixture
         $statut->setNomStatut("Refusé");
         $manager->persist($statut);
 
-        $materiel1 = new Materiel();
-        $materiel1->setNomMateriel("Ordinateur");
-        $manager->persist($materiel1);
-
-        $materiel2 = new Materiel();
-        $materiel2->setNomMateriel("Porte");
-        $manager->persist($materiel2);
-
-        $materiel3 = new Materiel();
-        $materiel3->setNomMateriel("Table");
-        $manager->persist($materiel3);
-
-        $materiel4 = new Materiel();
-        $materiel4->setNomMateriel("Toilette");
-        $manager->persist($materiel4);
-
-        $niveau1 = new Niveau();
-        $niveau1->setNomNiveau("Rez-de-chaussé");
-        $manager->persist($niveau1); 
-
-        $niveau2 = new Niveau();
-        $niveau2->setNomNiveau("Étage");
-        $manager->persist($niveau2); 
-
-        $zone1 = new Zone();
-        $zone1->setNomZone("Zone 1");
-        $zone1->addNiveau($niveau1);
-        $manager->persist($zone1);
-
-        $zone2 = new Zone();
-        $zone2->setNomZone("Zone 3");
-        $zone2->addNiveau($niveau2);
-        $manager->persist($zone2);
-
-        $zone3 = new Zone();
-        $zone3->setNomZone("Zone 2");
-        $zone3->addNiveau($niveau1);
-        $manager->persist($zone3);
-
-        $zone4 = new Zone();
-        $zone4->setNomZone("Zone 4");
-        $zone4->addNiveau($niveau2);
-        $manager->persist($zone4);
-
-        $salle1 = new Salle();
-        $salle1->setNumeroSalle("Salle 24");
-        $salle1->addZone($zone1);
-        $manager->persist($salle1);
-
-        $salle2 = new Salle();
-        $salle2->setNumeroSalle("Salle 49");
-        $salle2->addZone($zone2);
-        $manager->persist($salle2);
-
-        $salle3 = new Salle();
-        $salle3->setNumeroSalle("Salle 33b");
-        $salle3->addZone($zone3);
-        $manager->persist($salle3);
-
-        $salle4 = new Salle();
-        $salle4->setNumeroSalle("Salle 57");
-        $salle4->addZone($zone4);
-        $manager->persist($salle4);
-
         $ticket = [];
-        for ($i = 0; $i < 20; $i++){
+        for ($i = 0; $i < 50; $i++){
+
+            $materiel[$i] = new Materiel();
+            $materiel[$i]->setNomMateriel($faker->word);
+            $manager->persist($materiel[$i]);
+
+            $niveau[$i] = new Niveau();
+            $niveau[$i]->setNomNiveau("Rez-de-chaussé");
+            $manager->persist($niveau[$i]);
+            
+                $zone[$i] = new Zone();
+                $zone[$i]->setNomZone("Zone 1");
+                $zone[$i]->addNiveau($niveau[$i]);
+                $manager->persist($zone[$i]);
+                
+                    $salle[$i] = new Salle();
+                    $salle[$i]->setNumeroSalle("Salle 24");
+                    $salle[$i]->addZone($zone[$i]);
+                    $manager->persist($salle[$i]);
+                
+
             $ticket[$i] = new Ticket();
             $ticket[$i]->setTitreTicket($faker->sentence($nbWords = 3, $variableNbWords = true));
             $ticket[$i]->setDescriptionTicket($faker->paragraph($nbSentences = 2, $variableNbSentences = true));
@@ -137,50 +93,8 @@ class AppFixtures extends Fixture
             $ticket[$i]->setCategorieTicket($faker->word);
             $ticket[$i]->setUtilisateur($userAdmin);
             $ticket[$i]->setStatut($statutDefault);
-            $ticket[$i]->addMateriel($materiel1);
-            $ticket[$i]->addSalle($salle1);
-
-            $manager->persist($ticket[$i]);
-        }
-
-        for ($i = 0; $i < 10; $i++){
-            $ticket[$i] = new Ticket();
-            $ticket[$i]->setTitreTicket($faker->sentence($nbWords = 3, $variableNbWords = true));
-            $ticket[$i]->setDescriptionTicket($faker->paragraph);
-            $ticket[$i]->setDateTicket($faker->dateTimeBetween($startDate = '-3 month', $endDate = '+ 1 day'));
-            $ticket[$i]->setCategorieTicket($faker->word);
-            $ticket[$i]->setUtilisateur($userAdmin);
-            $ticket[$i]->setStatut($statutDefault);
-            $ticket[$i]->addMateriel($materiel2);
-            $ticket[$i]->addSalle($salle2);
-
-            $manager->persist($ticket[$i]);
-        }
-
-        for ($i = 0; $i < 10; $i++){
-            $ticket[$i] = new Ticket();
-            $ticket[$i]->setTitreTicket($faker->sentence($nbWords = 3, $variableNbWords = true));
-            $ticket[$i]->setDescriptionTicket($faker->paragraph);
-            $ticket[$i]->setDateTicket($faker->dateTimeBetween($startDate = '-3 month', $endDate = '+ 1 day'));
-            $ticket[$i]->setCategorieTicket($faker->word);
-            $ticket[$i]->setUtilisateur($userAdmin);
-            $ticket[$i]->setStatut($statutDefault);
-            $ticket[$i]->addMateriel($materiel3);
-            $ticket[$i]->addSalle($salle3);
-
-            $manager->persist($ticket[$i]);
-        }
-
-        for ($i = 0; $i < 10; $i++){
-            $ticket[$i] = new Ticket();
-            $ticket[$i]->setTitreTicket($faker->sentence($nbWords = 3, $variableNbWords = true));
-            $ticket[$i]->setDescriptionTicket($faker->paragraph);
-            $ticket[$i]->setDateTicket($faker->dateTimeBetween($startDate = '-3 month', $endDate = '+ 1 day'));
-            $ticket[$i]->setCategorieTicket($faker->word);
-            $ticket[$i]->setUtilisateur($userAdmin);
-            $ticket[$i]->setStatut($statutDefault);
-            $ticket[$i]->addMateriel($materiel4);
-            $ticket[$i]->addSalle($salle4);
+            $ticket[$i]->addMateriel($materiel[$i]);
+            $ticket[$i]->addSalle($salle[$i]);
 
             $manager->persist($ticket[$i]);
         }
