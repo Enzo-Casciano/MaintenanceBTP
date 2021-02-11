@@ -1,17 +1,22 @@
-image: php:latest
+image: node:9.4.0
 
 cache:
   paths:
-    - vendor/
+    - node_modules/
+    - .yarn
 
 before_script:
-  - com
-  - php bin/console doctrine:database:create
-  - symfony console make:migration
-  - symfony console doctrine:migrations:migrate
-  - composer require symfony/form
+  - composer install
+  - yarn install --force
+  - symfony console doctrine:schema:create
+  - symfony console doctrine:fixtures:load
 
-  test:
-    script:
-      - npm run-script build
+stages:
+  - build
+  - test
+
+Build:
+  stage: build
+  script:
+    - npm run build
       
