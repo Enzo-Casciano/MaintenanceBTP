@@ -1,18 +1,21 @@
-image: php:latest
+image: node:9.4.0
 
 cache:
   paths:
-    - vendor/
+    - node_modules/
+    - .yarn
 
 before_script:
   - yarn install
   - composer require symfony/webpack-encore-bundle
-  - php bin/console doctrine:database:create
-  - symfony console make:migration
-  - symfony console doctrine:migrations:migrate
   - composer require symfony/form
 
-  test:
-    script:
-      - npm run-script build
+stages:
+  - build
+  - test
+
+Build:
+  stage: build
+  script:
+    - npm run build
       
