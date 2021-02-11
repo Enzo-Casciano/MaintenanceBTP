@@ -16,11 +16,19 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Mailer\Bridge\Google\Smtp\GmailTransport;
+use Symfony\Component\Mime\TemplatedEmail;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Mailer\MailerInterface;
 
 class TicketController extends AbstractController
 {
-    public function index(Request $request, EntityManagerInterface $em, StatutRepository $statutRep): Response
+
+    public function index(Request $request, EntityManagerInterface $em, StatutRepository $statutRep, MailerInterface $mailer): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -55,6 +63,20 @@ class TicketController extends AbstractController
 
         if($form->isSubmitted()){
             // $ticket->getCriticite()->setNomCriticite("En attente");
+
+            // $email = (new Email())
+            //     ->from('test42@gmail.com') 
+            //     ->to('antoine.bouchet72@outlook.fr')
+            //     ->priority(Email::PRIORITY_HIGH) 
+            //     ->subject('Nouvelle demande de ticket')
+            //     // If you want use text mail only
+            //         ->text('Lorem ipsum...') 
+            //     // Raw html
+            //         ->html('<h1>Lorem ipsum</h1> <p>...</p>')
+            // ;
+            // $mailer->send($email);
+
+
             $ticket->setStatut($statut);
             $em->persist($ticket);
             $em->flush();

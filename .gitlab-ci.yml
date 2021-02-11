@@ -6,9 +6,10 @@ cache:
     - .yarn
 
 before_script:
-  - yarn install
-  - composer require symfony/webpack-encore-bundle
-  - composer require symfony/form
+  - composer install
+  - yarn install --force
+  - symfony console doctrine:schema:create
+  - symfony console doctrine:fixtures:load
 
 stages:
   - build
