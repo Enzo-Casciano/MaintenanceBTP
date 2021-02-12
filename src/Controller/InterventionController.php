@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class InterventionController extends AbstractController
 {
 
-    public function index(Request $request, EntityManagerInterface $em, $id, TicketRepository $ticketRep, InterventionRepository $interventionRep): Response
+    public function index(Request $request, EntityManagerInterface $em, $id, TicketRepository $ticketRep, InterventionRepository $interventionRep, StatutRepository $statutRep): Response
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -38,6 +38,10 @@ class InterventionController extends AbstractController
             $em->persist($intervention);
             $em->flush();
             $ticketRep->updateInterventionTicket($id, $interventionRep->getInterventionTicket());
+
+            if($ticketRep->getStatutTicket($id) === $statutRep->getStatut(1)) {
+                $ticketRep->updateStatutTicket($id, 4);
+            }
 
             return $this->redirectToRoute('resultat');
         }
@@ -61,8 +65,6 @@ class InterventionController extends AbstractController
         $materiel = $this->getDoctrine()
                          ->getRepository(Materiel::class)
                          ->find($id);
-                         
-        $changementStatutEnCours = $ticketRep->updateStatutTicket($id, 3);
 
     return $this->render('intervention/index.html.twig',[
          'form' => $form->createView(),
@@ -70,8 +72,7 @@ class InterventionController extends AbstractController
          'salle' => $salle,
          'niveau' => $niveau,
          'zone' => $zone,
-         'materiel' => $materiel,
-         'changementStatutEnCours' => $changementStatutEnCours
+         'materiel' => $materiel
     ]);
 }
 

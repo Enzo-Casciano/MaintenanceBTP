@@ -52,8 +52,8 @@ class StatutController extends AbstractController
         public function showOneTicket(Request $request, $id, TicketRepository $ticketRep, SalleRepository $salleRep, StatutRepository $statutRep, NiveauRepository $niveauRep, ZoneRepository $zoneRep, MaterielRepository $materielRep){
             
         $em = $this->getDoctrine()->getManager();
+        
         $ticket = $ticketRep->find($id);
-        // $materiel = $ticket->getMateriels();
 
         $salle = $salleRep->find($id);
 
@@ -65,16 +65,17 @@ class StatutController extends AbstractController
 
         $form = $this->createForm(TicketCriticiteType::class, $ticket);
 
-        if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3)) {
-            $ticketRep->updateStatutTicket($id, 2);
-        }
-
-        if($ticketRep->getStatutTicket($id) === $statutRep->getStatut(4)) {
-            $ticketRep->updateCriticiteTicket($id, 4);
-        }
-
         $form->handleRequest($request);
+
         if($form->isSubmitted()){
+
+            if($ticketRep->getStatutTicket($id) != $statutRep->getStatut(3)) {
+                $ticketRep->updateStatutTicket($id, 2);
+            }
+
+            if($ticketRep->getStatutTicket($id) === $statutRep->getStatut(4)) {
+                $ticketRep->updateCriticiteTicket($id, 4);
+            }
 
             $em->persist($ticket);
             $em->flush();
