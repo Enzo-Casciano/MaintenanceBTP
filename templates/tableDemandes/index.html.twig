@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste demandes assistances{% endblock %}
+
+{% block body %}
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
+</head>
+<a href="{{ path('home') }}">
+  <i class="fas fa-arrow-circle-left fa-2x"></i>
+</a><br><br>
+<table class="table" id="mytable">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col" data-sortable="true">Titre</th>
+      <th scope="col" data-sortable="true">Date demande</th>
+      <th scope="col" data-sortable="true">Demandeur</th>
+      <th scope="col" data-sortable="true">Statut</th>
+      <th scope="col" data-sortable="true">Criticité</th>
+      <th scope="col" data-sortable="true">Détails</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for ticket in listeTicket %}
+<tr>
+  <td>{{ ticket.titreTicket }}</td>
+  <td>{{ ticket.dateTicket|date('Y-m-d') }}</td>
+  <td>{{ ticket.utilisateur.nomUtilisateur }} {{ ticket.utilisateur.prenomUtilisateur }}</td>
+  <td>{{ ticket.statut.nomStatut }}</td>
+  <td>{{ ticket.nomCriticite }}</td>
+  <td>
+    <a href="{{ path('vueDemande',{ 'id': ticket.id }) }}">
+      <button type="button" class="btn btn-primary">Voir détails</button>
+    </a>
+  </td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<script>
+$(document).ready( function () {
+    $('#mytable').DataTable({
+            'order' : [[1, 'desc']],
+            'deferRender': true,
+            'pageLength': 10,
+        });
+} );
+</script>
+{% endblock %}

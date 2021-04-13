@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande d'intervention{% endblock %}
+{% block body %}
+<a href="{{ path('home') }}">
+  <i class="fas fa-arrow-circle-left fa-2x"></i>
+</a>
+<br><br>
+{{ form_start(form) }}
+<div class="bd-callout bd-callout-primary mx-auto shadow" style="width: 500px">
+    <div class="text-center">
+        <b>Demande d'assistance</b>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <b>
+            {% for rows in formZone.niveaux %}
+                {{ form_row(rows.nomNiveau, {
+                    'label': 'Niveau :'
+                }) }}
+            {% endfor %}
+
+            {% for row in form.salles %}
+                {{ form_row(row.numeroSalle, {
+                    'label': 'Salle :'
+                }) }}
+            {% endfor %}
+            
+            {{ form_row(form.categorieTicket, {
+                'label': 'Catégorie :'
+            }) }}
+
+        </b>
+    </div>
+    <div class="col-sm-6">
+        <b>
+            {% for r in formSalle.zones %}
+                {{ form_row(r.nomZone, {
+                    'label': 'Zone :'
+                }) }}
+            {% endfor %}
+
+            {{ form_row(form.titreTicket, {
+                'label': 'Titre de la demande :'
+            }) }}
+
+            {% for ro in form.materiels %}
+                {{ form_row(ro.nomMateriel, {
+                    'label': 'Quel(s) matériel(s) est défecteux ? :'
+                }) }}
+            {% endfor %}
+ 
+        </b>
+    </div>
+</div>
+<div class="text-center">
+    <b>
+        {{ form_row(form.descriptionTicket, {
+                'label': 'Description du problème rencontré :'
+            }) }}
+    </b>
+        {{ form_row(form.save, {
+            'label': 'Confirmer'
+        })}}
+    </div>
+</div>
+
+{{ form_end(form,{'render_rest': false}) }} 
+{% endblock %}

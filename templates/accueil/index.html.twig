@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="row">
+    {% if app.user %}
+        <div class="col-lg">
+            <a href="{{ path('resultat') }}">
+                <button type="button" class="btn btn-outline-dark shadow">Voir demandes</button>
+            </a>
+        </div>
+    {% endif %}
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choix niveau
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" id="rdc">Rez-de-chaussée</a>
+                    <a class="dropdown-item" href="#" id="eta">Étage</a>
+                </div>
+            </div>
+    {% if app.user %}
+        <div class="col-lg">
+        <a href="{{ path('ticket') }}">
+            <button type="button" class="btn btn-outline-success float-right shadow">Faire demandes</button>
+        </a>
+        </div>
+    {% endif %}
+    </div>
+    <br>
+    <hr>
+    <div class="text-center">
+        <img src="{{asset('doc/img/rez-de-chaussee.jpg')}}" id="imgRdc" style="width: 1200px; height: 800px;"/> 
+        <img src="{{asset('doc/img/etage.jpg')}}" id="imgEta" style="width: 1200px; height: 800px;"/> 
+    </div>
+    {{ form_end(form,{'render_rest': false}) }} 
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>
+     $("#imgEta").hide();
+
+    $("#rdc").click(function(){
+        $("#imgEta").hide();
+        $("#imgRdc").show();
+    });
+    $("#eta").click(function(){
+        $("#imgRdc").hide();
+        $("#imgEta").show();
+    });
+    </script>
+{% endblock %}

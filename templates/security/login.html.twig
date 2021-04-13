@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+    {% if app.user %}
+    <div class="bd-callout border-warning mx-auto shadow bg-light" style="width: 500px">
+    <div class="text-center">
+        <i class="text-center">Bonjour {{ app.user.prenomUtilisateur }} !</i>
+    </div>
+</div>
+    <div class="card border-warning mx-auto bg-light" style="width: 450px">
+        <div class="card-header bg-warning">
+                <h4 class="text-center"><i class="fad fa-id-card fa-2x"></i></h4>
+        </div>
+        <div class="card-body" style="width: 450px">
+            <div class="row">
+                <div class="col-sm">
+                    <div class="mb-3">
+                    <b>Prénom Utilisateur : </b>
+                    </div>
+                    <div class="mb-3">
+                    <b>Nom Utilisateur : </b>
+                    </div>
+                    <div class="mb-3">
+                    <b>Adresse mail : </b> 
+                    </div>
+                    <div class="mb-3">
+                    <b>Mot de passe : </b> 
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <p>{{ app.user.prenomUtilisateur }}</p>
+                    <p>{{ app.user.nomUtilisateur }}</p>
+                    <p>{{ app.user.username }}</p>
+                    <p>•••••••</p>
+                </div>
+            </div>
+                <hr>
+                <div class="mb-3 text-center">
+                    <a href="{{ path('app_logout') }}"><button type="button" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt"></i></button></a>
+                </div>
+        </div>
+    </div>
+    {% else %}
+    <div id="login">
+        <div class="container">
+            <div class="shadow card border-secondary text-white mx-auto bg-light mb-3 card mb-3" style="width: 500px;">
+                <div class="card-header card bg-secondary text-center text-white"><h2>Connexion</h2></div>
+                <div class="card-body text-info">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-12">
+                    <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form" action="" method="post">
+                            <div class="form-group">
+                                <label for="inputEmail" class="text-warning">Adresse Mail :</label><br>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Adresse mail" required autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="text-warning">Mot de passe :</label><br>
+                                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Mot de passe" required>
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </div>
+                            <div class="text-center form-group">
+                                <button class="btn btn-outline-warning" type="submit">Se connecter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger mx-auto" style="width: 500px">Adresse mail ou mot de passe incorrect ! Veuillez réessayez.</div>
+    {% endif %}
+<br>
+
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+
+{% endblock %}

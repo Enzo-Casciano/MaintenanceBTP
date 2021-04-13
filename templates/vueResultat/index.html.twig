@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MaterielController!{% endblock %}
+
+{% block body %}
+<a href="{{ path('resultat') }}">
+  <i class="fas fa-arrow-circle-left fa-2x"></i>
+</a>
+<h5 class="text-center">Détails de la demande :</h5>
+
+<div class="card mx-auto shadow" style="width: 1000px;">
+    <div class="card-header">
+        <h2 class="text-center" style="color:#FF7F00"><b>{{ ticket.titreTicket }}</b></h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <p><b>Demandeur : </b>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
+                <p><b>Catégorie de l'intervention : </b>{{ ticket.categorieTicket }}</p>
+                <p><b>Criticité : </b>{{ ticket.statut.criticiteStatut }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p><b>Date de la demande : </b>{{ ticket.dateTicket|date('d-m-Y') }}</p>
+                <p><b>Matériel(s) défectueux : </b>{{ materiel.nomMateriel }}</p>
+                <p><b>Statut: </b>{{ ticket.statut.nomStatut }}</p>
+            </div>
+        </div>
+        <br>
+            <p class="text-center"><b>Description du problème : </b><br>{{ ticket.descriptionTicket }}</p>
+        <br>
+        <hr class="shadow">
+        <div class="row text-center">
+            <div class="col-sm-4">
+                <p><b>Niveau : </b>{{ niveau.nomNiveau }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p><b>Zone : </b>{{ zone.nomZone }}</p>
+            </div>
+            <div class="col-sm-4">
+                <p><b>Salle : </b>{{ salle.numeroSalle }}</p>
+            </div>
+        </div>
+        <hr class="shadow">
+        <p class="text-center"><b>Technicien intervenant : </b><br>{{ utilisateur.prenomUtilisateur }} {{ utilisateur.nomUtilisateur }}</p>
+        <br>
+        <p class="text-center"><b>Description du technicien : </b><br>{{ intervention.descriptionIntervention }}</p>
+    </div>
+</div>
+<br>
+<script>
+{% endblock %}

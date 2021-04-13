@@ -1,0 +1,33 @@
+<nav class="navbar navbar-dark bg-dark shadow">
+    <div id="logo">
+      <a href="{{ path('home') }}">
+          {# <img src="{{asset('doc/img/logo-cesi.png')}}" style="width: 200px; height: 75px" />  #}
+          <h2 class="text-white">Maintenance BTP</h2>
+      </a>
+    </div>
+    {% if app.user %}
+    <div class="nav-button">
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path('validationdemande') }}">
+        <button type="button" class="btn btn-outline-light" id="validDemande"><i class="fas fa-vote-yea fa-lg"></i></button>
+      </a>
+      <a href="{{ path('app_register') }}">
+        <button type="button" class="btn btn-outline-info" id="addUser"><i class="fas fa-user-plus fa-lg"></i></button>
+      </a>
+    {% endif %}
+      <p class="text-white"> 
+        <a href="{{ path('utilisateur') }}">
+          <button type="button" class="btn btn-outline-warning">
+            <i class="fas fa-user-circle fa-lg"></i> 
+        {{ app.user.prenomUtilisateur }} {{ app.user.nomUtilisateur }}
+        </button>
+        </a>
+      </p>
+    </div>
+    {% else %}
+    <a href="{{ path('utilisateur') }}">
+      <button type="button" class="btn btn-warning">Connexion</button>
+    </a>
+    {% endif %}
+  </div>
+</nav>

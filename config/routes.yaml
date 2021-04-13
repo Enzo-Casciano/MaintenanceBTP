@@ -1,0 +1,47 @@
+intervention:
+  path: /intervention/{id}
+  controller: App\Controller\InterventionController::index
+# ---------------------------------------------------
+materiel:
+  path: /materiel
+  controller: App\Controller\MaterielController::index
+# ---------------------------------------------------
+home:
+  path: /
+  controller: App\Controller\NiveauController::index
+# ---------------------------------------------------
+role:
+  path: /role
+  controller: App\Controller\RoleController::index
+# ---------------------------------------------------
+salle:
+  path: /salle
+  controller: App\Controller\SalleController::index
+# ---------------------------------------------------
+resultat:
+  path: /resultat
+  controller: App\Controller\StatutController::showTickets
+# ---------------------------------------------------
+validationdemande:
+  path: /validationDemande
+  controller: App\Controller\StatutController::showTicketsAdmin
+# ---------------------------------------------------
+vueDemande:
+  path: /vueDemande/{id}
+  controller: App\Controller\StatutController::showOneTicket
+# ---------------------------------------------------
+vueResultat:
+  path: /vueResultat/{id}
+  controller: App\Controller\StatutController::showResultTicket
+# ---------------------------------------------------
+ticket:
+  path: /demande
+  controller: App\Controller\TicketController::index
+# ---------------------------------------------------
+utilisateur:
+  path: /connexion
+  controller: App\Controller\UtilisateurController::index
+# ---------------------------------------------------
+zone:
+  path: /zone
+  controller: App\Controller\ZoneController::index
