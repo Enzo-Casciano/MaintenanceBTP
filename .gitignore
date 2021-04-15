@@ -24,3 +24,8 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 >>>>>>> bd08eab1df918366c91ec2a40dcc05da8fffb025
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
